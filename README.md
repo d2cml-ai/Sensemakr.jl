@@ -12,7 +12,7 @@ You will need Julia version 1.7.0 or higher to install this package.
 The latest version can be downloaded by running:
 
 ```julia
-import Pkg; Pkg.add(url = "https://github.com/d2cml-ai/Sensemakr.jl)
+import Pkg; Pkg.add(url = "https://github.com/d2cml-ai/Sensemakr.jl")
 ```
 
 The latest stable version can be downloaded by running:
