@@ -176,6 +176,7 @@ function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_
     end
     plt.xlabel(xlab)
     plt.ylabel(ylab)
+    plt.xlim(-(lim / 35), lim + (lim / 35))
     if isnothing(lim_y)
         plt.ylim(lim_y2, lim_y1)
     else
