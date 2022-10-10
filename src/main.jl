@@ -195,12 +195,16 @@ function plot(sense_obj::Senseobj; plot_type = "contour", r2dz_x::Union{Array, R
 
     treatment, estimate, se, dof, r2dz_x, r2yz_dx, bound_label, reduce, estimate_threshold, t_threshold, benchmark_covariates, kd, ky = extract_from_sense_obj(sense_obj)
 
-    
     if plot_type == "contour"
         ovb_contour_plot(estimate, se, dof, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, sensitivity_of = sensitivity_of, kd = kd, ky = ky, 
         benchmark_covariates = benchmark_covariates, bound_label = bound_label, reduce = reduce, estimate_threshold = estimate_threshold, t_threshold = t_threshold, 
         lim = lim, lim_y = lim_y, col_contour = col_contour, col_thr_line = col_thr_line, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, 
         xlab = xlab, ylab = ylab, plot_margin_fraction = plot_margin_fraction, round_dig = round_dig, n_levels = n_levels)
+    elseif (plot_type == "extreme") && (sensitivity_of == "estimate")
+        ovb_extreme_plot(estimate, se, dof, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, reduce = reduce, 
+        threshold = threshold, lim = lim, lim_y= lim_y, xlab = xlab, ylab = ylab)
+    elseif (plot_type == "extreme") && (sensitivity_of == "t-statistic")
+        throw(ErrorException("Extreme plot for t-statistic not implemented yet"))
     end
 
 end

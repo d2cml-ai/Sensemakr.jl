@@ -128,6 +128,59 @@ function ovb_contour_plot(model::StatsModels.TableRegressionModel, treatment::St
 
 end
 
+function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_covariates = nothing, kd = 1, ky = nothing, 
+    r2dz_x::Union{Array{<:Real}, Real, Nothing} = nothing, r2yz_dx::Union{Array{<:Real}, Real, Nothing} = [1.0, 0.75, 0.5], reduce::Bool = true, threshold = 0, 
+    lim = nothing, lim_y = nothing, xlab = nothing, ylab = nothing)
+
+    r2dz_x, r2yz_dx, lim = check_params_extreme(r2dz_x, r2yz_dx, lim)
+
+    r2d_values = collect(0:0.001:lim)
+
+    fig, ax = subplots(1, 1, figsize = (8, 4.8))
+    for i in eachindex(r2yz_dx)
+        y = adjusted_estimate(r2d_values, r2yz_dx[i], estimate = estimate, se = se, dof = dof)
+
+        if i == 1
+            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i]))), "%"]), linewidth = 1.5, linestyle = "solid", color = "black")
+            ax.axhline(y = threshold, color = "r", linesyle = "--")
+            lim_y1 = maximum(y) + abs(maximum(y)) / 15
+            lim_y2 = minimum(y) - abs(minimum(y)) / 15
+
+            if !isnothing(r2dz_x)
+                if r2dz_x isa Real
+                    r2dz_x = [r2dz_x]
+                end
+                for rug in r2dz_x
+                    ax.axvline(x = rug, ymin = 0, ymax = 0.022, color = "r", linewidth = 2.5, linestyle = "solid")
+                end
+            end
+        else
+            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i]))), "%"]), linewidth = abs(2.1 - 0.5 * i), linestyle = "--", color = "black")
+        end
+    end
+
+    ax.legend(ncol = length(r2yz_dx), frameon = false)
+    ax.get_legend().set_title(L"Partial $R^2$ of confounder(s) with the outcome")
+    ax.spines["top"].set_visible(false)
+    ax.spines["right"].set_visible(false)
+    
+    if isnothing(xlab)
+        xlab = L"Partial $R^2$ of confounder(s) with the treatment"
+    end
+    if isnothing(ylab)
+        ylab = "Adjusted effect estimate"
+    end
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
+    if isnothing(lim_y)
+        plt.ylim(lim_y2, lim_y1)
+    else
+        plt.ylim(-(lim_y / 15), lim_y)
+    end
+    plt.tight_layout()
+end
+
+
 function extract_from_model(model, treatment, benchmark_covariates, kd, ky, r2dz_x, r2yz_dx)
 
     if isnothing(ky)
@@ -278,4 +331,31 @@ function check_params(estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label
     end
     
     return estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label_bump_y
+end
+
+function check_params_extreme(r2dz_x, r2yz_dx, lim)
+
+    if isnothing(lim)
+        if isnothing(r2dz_x)
+            lim = 0.4
+        else
+            if r2yz_dx isa Real
+                lim = minimum([maximum([r2dz_x * 1.2, 0.4]), 1 - 1e-12])
+            else
+                lim = minimum([maximum(vcat(r2dz_x * 1.2, 0.4)), 1 - 1e-12])
+            end
+        end
+    end
+    
+    if lim > 1
+        lim = 1 - 1e-12
+        print("Warning: contour limit larger than 1 was set to 1")
+    elseif lim < 0
+        lim = 0
+        print("Warning: contour limit lesser than 0 was set to 0")
+    end
+
+    r2dz_x, r2yz_dx = check_r2(r2dz_x, r2yz_dx)
+
+    return r2dz_x, r2yz_dx, lim
 end
