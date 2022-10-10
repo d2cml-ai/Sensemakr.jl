@@ -36,7 +36,7 @@ fitted_model = lm(form, darfur);
 ```
 
 ```julia
-darfur_sense = Sensemakr(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3]);
+darfur_sense = Senseobj(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3]);
 summary(darfur_sense)
 ```
 
