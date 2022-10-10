@@ -12,13 +12,13 @@ You will need Julia version 1.7.0 or higher to install this package.
 The latest version can be downloaded by running:
 
 ```julia
-import Pkg; Pkg.add(url = "https://github.com/d2cml-ai/Sensemakr.jl)
+import Pkg; Pkg.add(url = "https://github.com/d2cml-ai/Sensemakr.jl")
 ```
 
 The latest stable version can be downloaded by running:
 
 ```julia
-import Pkg; Pkg.add(Sensemakr)
+import Pkg; Pkg.add("Sensemakr")
 ```
 
 ## Example Usage
@@ -36,7 +36,7 @@ fitted_model = lm(form, darfur);
 ```
 
 ```julia
-darfur_sense = Sensemakr(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3]);
+darfur_sense = Senseobj(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3]);
 summary(darfur_sense)
 ```
 
