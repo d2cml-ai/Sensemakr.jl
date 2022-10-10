@@ -137,11 +137,15 @@ function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_
     r2d_values = collect(0:0.001:lim)
 
     fig, ax = subplots(1, 1, figsize = (8, 4.8))
+
+    lim_y1 = nothing
+    lim_y2 = nothing
+    
     for i in eachindex(r2yz_dx)
         y = adjusted_estimate(r2d_values, r2yz_dx[i], estimate = estimate, se = se, dof = dof)
 
         if i == 1
-            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i]))), "%"]), linewidth = 1.5, linestyle = "solid", color = "black")
+            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i] * 100))), "%"]), linewidth = 1.5, linestyle = "solid", color = "black")
             ax.axhline(y = threshold, color = "r", linestyle = "--")
             lim_y1 = maximum(y) + abs(maximum(y)) / 15
             lim_y2 = minimum(y) - abs(minimum(y)) / 15
@@ -155,7 +159,7 @@ function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_
                 end
             end
         else
-            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i]))), "%"]), linewidth = abs(2.1 - 0.5 * i), linestyle = "--", color = "black")
+            ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i] * 100))), "%"]), linewidth = abs(2.1 - 0.5 * i), linestyle = "--", color = "black")
         end
     end
 
