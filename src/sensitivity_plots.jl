@@ -142,7 +142,7 @@ function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_
 
         if i == 1
             ax.plot(r2d_values, y, label = join([string(Int(round(r2dz_x[i]))), "%"]), linewidth = 1.5, linestyle = "solid", color = "black")
-            ax.axhline(y = threshold, color = "r", linesyle = "--")
+            ax.axhline(y = threshold, color = "r", linestyle = "--")
             lim_y1 = maximum(y) + abs(maximum(y)) / 15
             lim_y2 = minimum(y) - abs(minimum(y)) / 15
 
