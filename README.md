@@ -18,7 +18,7 @@ import Pkg; Pkg.add(url = "https://github.com/d2cml-ai/Sensemakr.jl)
 The latest stable version can be downloaded by running:
 
 ```julia
-import Pkg; Pkg.add(Sensemakr)
+import Pkg; Pkg.add("Sensemakr")
 ```
 
 ## Example Usage
