@@ -202,6 +202,9 @@ function plot(sense_obj::Senseobj; plot_type = "contour", r2dz_x::Union{Array, R
         lim = lim, lim_y = lim_y, col_contour = col_contour, col_thr_line = col_thr_line, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, 
         xlab = xlab, ylab = ylab, plot_margin_fraction = plot_margin_fraction, round_dig = round_dig, n_levels = n_levels)
     elseif (plot_type == "extreme") && (sensitivity_of == "estimate")
+        if isnothing(r2yz_dx)
+            r2yz_dx = [1.0, 0.75, 0.5]
+        end
         ovb_extreme_plot(estimate, se, dof, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, reduce = reduce, 
         threshold = estimate_threshold, lim = lim, lim_y= lim_y, xlab = xlab, ylab = ylab)
     elseif (plot_type == "extreme") && (sensitivity_of == "t-statistic")
