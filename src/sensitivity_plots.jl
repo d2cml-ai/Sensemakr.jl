@@ -223,7 +223,7 @@ function extract_from_model(model, treatment, benchmark_covariates, kd, ky, r2dz
     
 end
 
-function extract_from_sense_obj(sense_obj::Senseobj)
+function extract_from_sense_obj(sense_obj::sensemakr)
 
     treatment = sense_obj.treatment
     estimate = sense_obj.estimate

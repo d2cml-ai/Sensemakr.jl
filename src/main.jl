@@ -1,4 +1,4 @@
-mutable struct Senseobj
+mutable struct sensemakr
     
     model::StatsModels.TableRegressionModel
     treatment::String
@@ -27,7 +27,7 @@ mutable struct Senseobj
     bounds::Union{Nothing, DataFrame}
 end
 
-function Senseobj(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, 
+function sensemakr(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, 
     r2dz_x = nothing, r2yz_dx = nothing, r2dxj_x = nothing, r2yxj_dx = nothing, bound_label = "Manual Bound", reduce = true)
 
     adjusted_estimate = nothing
@@ -109,20 +109,20 @@ function Senseobj(model::StatsModels.TableRegressionModel, treatment::String; be
         append!(bounds, bench_bounds, cols = :union)
     end
 
-    sense_obj = Senseobj(
+    sense_obj = sensemakr(
         model, treatment, estimate, se, dof, benchmark_covariates, kd, ky, q, alpha, r2dz_x, r2yz_dx, r2dxj_x, r2yxj_dx, bound_label, reduce, sensitivity_statistics, 
         h0, adjusted_estimate, adjusted_se, adjusted_t, adjusted_lower_CI, adjusted_upper_CI, bench_bounds, bounds
     )
     return sense_obj
 end
 
-#= function Senseobj(estimate::Float64, se::Float64, dof::Int64; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, r2dz_x = nothing, 
+#= function sensemakr(estimate::Float64, se::Float64, dof::Int64; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, r2dz_x = nothing, 
     r2yz_dx = nothing, r2dxj_x = nothing, r2yxj_dx = nothing, bound_label = "Manual Bound", reduce = true)
 
     
 end =#
 
-function Base.summary(sense_obj::Senseobj, digits::Int64 = 3)
+function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
     if sense_obj.reduce
         h0 = round(sense_obj.estimate * (1 - sense_obj.q), digits = digits)
@@ -187,7 +187,7 @@ function Base.summary(sense_obj::Senseobj, digits::Int64 = 3)
     end
 end
 
-function plot(sense_obj::Senseobj; plot_type = "contour", r2dz_x::Union{Array, Real, Nothing} = nothing, r2yz_dx::Union{Array, Real, Nothing} = nothing, 
+function plot(sense_obj::sensemakr; plot_type = "contour", r2dz_x::Union{Array, Real, Nothing} = nothing, r2yz_dx::Union{Array, Real, Nothing} = nothing, 
     sensitivity_of::String = "estimate", kd::Union{Array, Real} = 1, ky::Union{Array, Real, Nothing} = nothing, benchmark_covariates = nothing, 
     bound_label = nothing, reduce::Bool = true, estimate_threshold = 0, t_threshold = 2, lim = nothing, lim_y = nothing, col_contour = "black", 
     col_thr_line = "red", label_text::Bool = true, label_bump_x = nothing, label_bump_y = nothing, xlab = nothing, ylab = nothing, plot_margin_fraction = 0.05, 
@@ -213,7 +213,7 @@ function plot(sense_obj::Senseobj; plot_type = "contour", r2dz_x::Union{Array, R
 
 end
 
-function obv_bounds(sense_obj::Senseobj)
+function obv_bounds(sense_obj::sensemakr)
     
     model = sense_obj.model
     treatment = sense_obj.treatment
