@@ -5,6 +5,9 @@
 [![Build Status](https://github.com/d2cml-ai/Sensemakr.jl/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/d2cml-ai/Sensemakr.jl/actions/workflows/CI.yml?query=branch%3Amaster)
 [![Coverage](https://codecov.io/gh/d2cml-ai/Sensemakr.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/d2cml-ai/Sensemakr.jl)
 
+sensemakr for Julia (Sensemakr) implements a suite of sensitivity analysis tools that extends the traditional omitted variable bias framework and makes it easier to understand the impact of omitted variables in regression models, as discussed in Cinelli, C. and Hazlett, C. (2020) “Making Sense of Sensitivity: Extending Omitted Variable Bias.” Journal of the Royal Statistical Society, Series B (Statistical Methodology).
+
+
 ## Installation
 
 You will need Julia version 1.7.0 or higher to install this package.
