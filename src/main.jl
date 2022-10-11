@@ -193,19 +193,13 @@ function plot(sense_obj::sensemakr; plot_type = "contour", r2dz_x::Union{Array, 
     col_thr_line = "red", label_text::Bool = true, label_bump_x = nothing, label_bump_y = nothing, xlab = nothing, ylab = nothing, plot_margin_fraction = 0.05, 
     round_dig = 3, n_levels = nothing)
 
-    treatment, estimate, se, dof, r2dz_x, dum, bound_label, reduce, estimate_threshold, t_threshold, benchmark_covariates, kd, ky = extract_from_sense_obj(sense_obj)
-
     if plot_type == "contour"
-        r2yz_dx = dum
-        ovb_contour_plot(estimate, se, dof, r2dz_x = r2dz_x, r2yz_dx = dum, sensitivity_of = sensitivity_of, kd = kd, ky = ky, 
+        ovb_contour_plot(sense_obj, r2dz_x = r2dz_x, r2yz_dx = dum, sensitivity_of = sensitivity_of, kd = kd, ky = ky, 
         benchmark_covariates = benchmark_covariates, bound_label = bound_label, reduce = reduce, estimate_threshold = estimate_threshold, t_threshold = t_threshold, 
         lim = lim, lim_y = lim_y, col_contour = col_contour, col_thr_line = col_thr_line, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, 
         xlab = xlab, ylab = ylab, plot_margin_fraction = plot_margin_fraction, round_dig = round_dig, n_levels = n_levels)
     elseif (plot_type == "extreme") && (sensitivity_of == "estimate")
-        if isnothing(r2yz_dx)
-            r2yz_dx = [1.0, 0.75, 0.5]
-        end
-        ovb_extreme_plot(estimate, se, dof, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, reduce = reduce, 
+        ovb_extreme_plot(sense_obj, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, reduce = reduce, 
         threshold = estimate_threshold, lim = lim, lim_y= lim_y, xlab = xlab, ylab = ylab)
     elseif (plot_type == "extreme") && (sensitivity_of == "t-statistic")
         throw(ErrorException("Extreme plot for t-statistic not implemented yet"))

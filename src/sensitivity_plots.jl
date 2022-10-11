@@ -8,11 +8,11 @@ function ovb_contour_plot(estimate::Float64, se::Float64, dof::Int64; r2dz_x::Un
         throw(ArgumentError("sensitivity_of option must be either \"estimate\" or \"t-value\""))
     end
     estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label_bump_y = check_params(estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label_bump_y)
-    plot_env = Dict()
-    plot_env["lim"] = lim
-    plot_env["lim_y"] = lim_y
-    plot_env["reduce"] = reduce
-    plot_env["sensitivity_of"] = sensitivity_of
+    # plot_env = Dict()
+    # plot_env["lim"] = lim
+    # plot_env["lim_y"] = lim_y
+    # plot_env["reduce"] = reduce
+    # plot_env["sensitivity_of"] = sensitivity_of
     # add plot_env["treatment"] in another method
     
     grid_values_x = collect(0:lim/400:lim)
@@ -47,7 +47,6 @@ function ovb_contour_plot(estimate::Float64, se::Float64, dof::Int64; r2dz_x::Un
         bound_value = bound_value[1]
     end
 
-    # z_axis = reshape(z_axis, length(grid_values_x), length(grid_values_y))
     z_axis = reshape(z_axis, length(grid_values_y), length(grid_values_x))
     fig, ax = subplots(1, 1, figsize = (6, 6))
     if !isnothing(n_levels)
@@ -128,6 +127,20 @@ function ovb_contour_plot(model::StatsModels.TableRegressionModel, treatment::St
 
 end
 
+function ovb_contour_plot(sense_obj::sensemakr; r2dz_x = nothing, r2yz_dx = nothing, sensitivity_of::String = "estimate", 
+    kd::Union{Vector, Real} = 1, ky::Union{Vector, Real, Nothing} = nothing, benchmark_covariates = nothing, bound_label = nothing, reduce::Bool = true, 
+    estimate_threshold = 0, t_threshold = 2, lim = nothing, lim_y = nothing, col_contour = "black", col_thr_line = "red", label_text::Bool = true, 
+    label_bump_x = nothing, label_bump_y = nothing, xlab = nothing, ylab = nothing, plot_margin_fraction = 0.05, round_dig = 3, n_levels = nothing)
+
+    treatment, estimate, se, dof, r2dz_x, r2yz_dx, bound_label, reduce, estimate_threshold, t_threshold, benchmark_covariates, kd, ky = extract_from_sense_obj(sense_obj)
+
+    ovb_contour_plot(estimate, se, dof, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, sensitivity_of = sensitivity_of, kd = kd, ky = ky, 
+    benchmark_covariates = benchmark_covariates, bound_label = bound_label, reduce = reduce, estimate_threshold = estimate_threshold, t_threshold = t_threshold, 
+    lim = lim, lim_y = lim_y, col_contour = col_contour, col_thr_line = col_thr_line, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, 
+    xlab = xlab, ylab = ylab, plot_margin_fraction = plot_margin_fraction, round_dig = round_dig, n_levels = n_levels)
+
+end
+
 function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_covariates = nothing, kd = 1, ky = nothing, 
     r2dz_x::Union{Array{<:Real}, Real, Nothing} = nothing, r2yz_dx::Union{Array{<:Real}, Real, Nothing} = [1.0, 0.75, 0.5], reduce::Bool = true, threshold = 0, 
     lim = nothing, lim_y = nothing, xlab = nothing, ylab = nothing)
@@ -185,6 +198,16 @@ function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_
     tight_layout()
 end
 
+function ovb_extreme_plot(sense_obj::sensemakr; benchmark_covariates = nothing, kd = 1, ky = nothing, 
+    r2dz_x::Union{Array{<:Real}, Real, Nothing} = nothing, r2yz_dx::Union{Array{<:Real}, Real, Nothing} = [1.0, 0.75, 0.5], reduce::Bool = true, threshold = 0, 
+    lim = nothing, lim_y = nothing, xlab = nothing, ylab = nothing)
+
+    treatment, estimate, se, dof, r2dz_x, dum, bound_label, reduce, estimate_threshold, t_threshold, benchmark_covariates, kd, ky = extract_from_sense_obj(sense_obj)
+
+    ovb_extreme_plot(estimate, se, dof, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, reduce = reduce, 
+    threshold = estimate_threshold, lim = lim, lim_y= lim_y, xlab = xlab, ylab = ylab)
+
+end
 
 function extract_from_model(model, treatment, benchmark_covariates, kd, ky, r2dz_x, r2yz_dx)
 

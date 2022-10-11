@@ -1,5 +1,3 @@
-# cd("/Documents/Work/d2cml-ai/Sensemakr.jl")
-
 using Test
 using Sensemakr
 using CSV, DataFrames, GLM
