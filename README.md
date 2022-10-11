@@ -91,3 +91,9 @@ plot(darfur_sense, sensitivity_of = "t-value")
 ```
 
 ![Figure_2](images/Figure_2.png)
+
+```julia
+plot(darfur_sense, plot_type = "extreme")
+```
+
+![Figure_3](images/Figure_3.png)
