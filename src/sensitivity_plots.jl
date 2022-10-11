@@ -141,9 +141,17 @@ function ovb_contour_plot(sense_obj::sensemakr; r2dz_x = nothing, r2yz_dx = noth
 
 end
 
-function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; benchmark_covariates = nothing, kd = 1, ky = nothing, 
+function ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; sensitivity_of::String = "estimate", benchmark_covariates = nothing, kd = 1, ky = nothing, 
     r2dz_x::Union{Array{<:Real}, Real, Nothing} = nothing, r2yz_dx::Union{Array{<:Real}, Real, Nothing} = [1.0, 0.75, 0.5], reduce::Bool = true, threshold = 0, 
     lim = nothing, lim_y = nothing, xlab = nothing, ylab = nothing)
+
+    if sensitivity_of != "estimate"
+        if sensitivity_of == "t-statistic"
+            throw(ArgumentError("Extreme plot for t-statistic has not been included yet"))
+        else
+            throw(ArgumentError("\"sensitivity_of\" argument must be \"estimate\""))
+        end
+    end
 
     r2dz_x, r2yz_dx, lim = check_params_extreme(r2dz_x, r2yz_dx, lim)
 
