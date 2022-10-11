@@ -342,12 +342,12 @@ function check_params_extreme(r2dz_x, r2yz_dx, lim)
 
     if isnothing(lim)
         if isnothing(r2dz_x)
-            lim = 0.4
+            lim = 0.1
         else
             if r2yz_dx isa Real
-                lim = minimum([maximum([r2dz_x * 1.2, 0.4]), 1 - 1e-12])
+                lim = minimum([maximum([r2dz_x * 1.2, 0.1]), 1 - 1e-12])
             else
-                lim = minimum([maximum(vcat(r2dz_x * 1.2, 0.4)), 1 - 1e-12])
+                lim = minimum([maximum(vcat(r2dz_x * 1.2, 0.1)), 1 - 1e-12])
             end
         end
     end
