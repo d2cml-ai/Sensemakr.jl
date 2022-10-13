@@ -54,10 +54,13 @@ function ovb_contour_plot(estimate::Float64, se::Float64, dof::Int64; r2dz_x::Un
     end
     CS = ax.contour(grid_values_x, grid_values_y, z_axis, colors = col_contour, linewidths = 1.0, linestyles = "solid", levels = n_levels)
     round_thr = round(threshold, digits = 2)
-    if any(isapprox.(round_thr, CS.levels, atol = 0.1))
-        threshold_index = findall(isapprox.(round_thr, CS.levels, atol = 0.1))[1]
-        popat!(CS.collections, threshold_index)
-        ax.clabel(CS, inline = 1, fontsize = 8, fmt = "%1.3g", colors = "gray", levels = CS.levels[Not(threshold_index)])
+    cs_level = copy(round.(CS.levels, digits = 3))
+    if round_thr in cs_level
+        ax.cla()
+        threshold_index = findall(round_thr .== cs_level)
+        deleteat!(cs_level, threshold_index)
+        CS = ax.contour(grid_values_x, grid_values_y, z_axis, colors = col_contour, linewidths = 1.0, linestyles = "solid", levels = cs_level)
+        ax.clabel(CS, inline = 1, fontsize = 8, fmt = "%1.3g", colors = "gray", levels = CS.levels)
     else
         ax.clabel(CS, inline = 1, fontsize = 8, fmt = "%1.3g", colors = "gray", levels = CS.levels)
     end
