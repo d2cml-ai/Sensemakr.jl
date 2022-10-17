@@ -22,5 +22,6 @@ makedocs(;
 deploydocs(;
     repo="github.com/d2cml-ai/Sensemakr.jl",
     devbranch="master",
+    devurl = "dev",
     versions = ["stable" => "v^", "v#.#.#", devurl => devurl]
 )
