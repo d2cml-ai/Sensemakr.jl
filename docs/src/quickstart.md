@@ -183,6 +183,7 @@ Let us begin by examining contour plots for the point estimate.
 ````julia
 plot(darfur_sense)
 ````
+![Figure_1](images/Figure_1.png)
 
 The horizontal axis shows the hypothetical residual share of variation of the treatment that unobserved confounding explains, $R^2_{D\sim Z| {\bf X} }$. The vertical axis shows the hypothetical partial $R^2$ of unobserved confounding with the outcome, $R^2_{Y\sim Z| {\bf X}, D}$. The contours show what would be the estimate for `directlyharmed` that one would have obtained in the full regression model including unobserved confounders with such hypothetical strengths. Note the plot is parameterized in way that hurts our preferred hypothesis, by pulling the estimate towards zero—the direction of the bias was set in the argument `reduce = true` of `sensemakr()`.
 
@@ -193,6 +194,7 @@ We now examine the sensitivity of the t-value for testing the null hypothesis of
 ````julia
 plot(darfur_sense, sensitivity_of = "t-value")
 ````
+![Figure_2](images/Figure_2.png)
 
 The plot reveals that, at the 5% significance level, the null hypothesis of zero effect would still be rejected given confounders once or twice as strong as `female`. However, by contrast to the point-estimate, accounting for sampling uncertainty now means that the null hypothesis of zero effect would not be rejected with the inclusion of a confounder three times as strong as `female`.
 
@@ -203,6 +205,7 @@ Sometimes researchers may be better equipped to make plausibility judgments abou
 ````julia
 plot(darfur_sense, plot_type = "extreme")
 ````
+![Figure_3](images/Figure_3.png)
 
 ## References
 
