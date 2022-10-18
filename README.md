@@ -87,16 +87,16 @@ Bounds on omitted variable bias:
 plot(darfur_sense)
 ```
 
-![Figure_1](images/Figure_1.png)
+![Figure_1](docs/src/images/Figure_1.png)
 
 ```julia
 plot(darfur_sense, sensitivity_of = "t-value")
 ```
 
-![Figure_2](images/Figure_2.png)
+![Figure_2](docs/src/images/Figure_2.png)
 
 ```julia
 plot(darfur_sense, plot_type = "extreme")
 ```
 
-![Figure_3](images/Figure_3.png)
+![Figure_3](docs/src/images/Figure_3.png)
