@@ -134,7 +134,7 @@ function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
     println("Sensitivity Analysis to Unobserved Confounding\n")
     if !isnothing(sense_obj.model)
-        println("Model Formula: ", string.(keys(sense_obj.model.mf.schema))[1], " ~ ", join(string.(keys(sense_obj.model.mf.schema))[2:end], " + "), "\n")
+        println("Model Formula: ", sense_obj.model.mf.f, "\n")
     end
     println("Null hypothesis: q = ", sense_obj.q, " and reduce = ", sense_obj.reduce)
     println("-- This means we are considering biases that ", direction, " the absolute value of the current estimate")
@@ -143,7 +143,7 @@ function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
     println("Unadjusted Estimates of \"", sense_obj.treatment, "\":")
     println("   Coef. Estimate: ", round(sense_obj.estimate, digits = digits))
     println("   Standard Error: ", round(sense_obj.se, digits = digits))
-    println("   t-value: ", round(sense_obj.sensitivity_statistics["t_statistic"][1], digits = digits))
+    println("   t-value: ", round(sense_obj.sensitivity_statistics["t_statistic"][1], digits = digits), "\n")
 
     println("Sensitivity Statistics:")
     println("   Partial R2 of treatment with outcome: ", round.(sense_obj.sensitivity_statistics["r2yd_x"][1], digits = digits))
@@ -227,7 +227,7 @@ function Base.print(sense_obj::sensemakr, digits = 3)
 
     println("Sensitivity Analysis to Unobserved Confounding\n")
     if !isnothing(sense_obj.model)
-        println("Model Formula: ", string.(keys(sense_obj.model.mf.schema))[1], " ~ ", join(string.(keys(sense_obj.model.mf.schema))[2:end], " + "), "\n")
+        println("Model Formula: ", sense_obj.model.mf.f, "\n")
     end
     println("Null hypothesis: q = ", sense_obj.q, " and reduce = ", sense_obj.reduce, "\n")
 
