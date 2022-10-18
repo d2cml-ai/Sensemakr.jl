@@ -87,3 +87,26 @@ julia> darfur_sense = sensemakr(fitted_model, "directlyharmed", benchmark_covari
 
 Once we run `sensemakr`, we can now explore the sensitivity analysis results.
 
+## Minimal sensitivity reporting
+
+The print method of Sensemakr provides a quick review of the original (unadjusted) estimates along with three summary sensitivity statistics suited for routine reporting: the partial $R^2$ of the treatment with the outcome, the robustness value ($RV$) required to reduce the estimate entirely to zero (i.e. $q=1$), and the RV beyond which the estimate would no longer be statistically distinguishable from zero at the 0.05 level
+
+```julia
+julia> print(darfur_sense)
+Sensitivity Analysis to Unobserved Confounding
+
+Model Formula: hhsize_darfur ~ farmer_dar + herder_dar + female + village + peacefactor + age + directlyharmed + pastvoted
+
+Null hypothesis: q = 1.0 and reduce = true
+
+Unadjusted Estimates of "directlyharmed":
+   Coef. Estimate: 0.097
+   Standard Error: 0.023
+   t-value: 4.184
+
+Sensitivity Statistics:
+   Partial R2 of treatment with outcome: 0.022
+   Robustness Value, q = 1.0: 0.139
+   Robustness Value, q = 1.0 alpha = 0.05: 0.076
+```
+
