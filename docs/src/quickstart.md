@@ -14,7 +14,7 @@ In 2003 and 2004, the Darfurian government orchestrated a horrific campaign of v
 
 `Sensemakr` comes with the Darfur dataset, which can be loaded with the command `data.load_darfur()`. More details about the data can be found in the documentation, as well as in Hazlett (2019) and Cinelli and Hazlett (2020).
 
-````@example quickstart
+````julia
 # imports Sensemakr
 using Sensemakr
 # loads darfur data
@@ -23,19 +23,26 @@ darfur = load_darfur();
 first(darfur, 5)
 ````
 
+```@raw html
+<div class="data-frame"><p>5 rows × 14 columns</p><table class="data-frame"><thead><tr><th></th><th>wouldvote</th><th>peacefactor</th><th>peace_formerenemies</th><th>peace_jjindiv</th><th>peace_jjtribes</th><th>gos_soldier_execute</th><th>directlyharmed</th><th>age</th><th>farmer_dar</th><th>herder_dar</th><th>pastvoted</th><th>hhsize_darfur</th><th>village</th><th>female</th></tr><tr><th></th><th title="Int64">Int64</th><th title="Float64">Float64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="InlineStrings.String31">String31</th><th title="Int64">Int64</th></tr></thead><tbody><tr><th>1</th><td>0</td><td>1.0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>30</td><td>0</td><td>0</td><td>1</td><td>23</td><td>Abdel Khair</td><td>0</td></tr><tr><th>2</th><td>0</td><td>0.706831</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>20</td><td>1</td><td>0</td><td>1</td><td>5</td><td>Abdi Dar</td><td>1</td></tr><tr><th>3</th><td>1</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>45</td><td>1</td><td>0</td><td>0</td><td>15</td><td>Abu Sorog</td><td>0</td></tr><tr><th>4</th><td>1</td><td>0.495178</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>55</td><td>0</td><td>0</td><td>0</td><td>9</td><td>Abu Dejaj</td><td>0</td></tr><tr><th>5</th><td>0</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>25</td><td>1</td><td>0</td><td>1</td><td>7</td><td>Abu Dejaj</td><td>1</td></tr></tbody></table></div>
+```
+
 A natural approach for such problem is to run the following linear regression model, where we regress `peacefactor` on `directlyharmed`, further adjusting for `village`, `female` as well as other covariates. Here we run this regression using `GLM`
 
-````@example quickstart
+````julia
 using GLM
 form = @formula(peacefactor ~ directlyharmed + age + farmer_dar + herder_dar + pastvoted + hhsize_darfur + female + village);
 fitted_model = lm(form, darfur);
-nothing #hide
 ````
 
 The above regression results in the following estimate and standard errors for the coefficient of `directlyharmed`:
 
-````@example quickstart
+````julia
 first(coeftable(fitted_model), 2)[2]
+````
+
+````
+(Name = "directlyharmed", var"Coef." = 0.09731581928495726, var"Std. Error" = 0.023256537809811153, t = 4.184449984808271, var"Pr(>|t|)" = 3.182339959789431e-5, var"Lower 95%" = 0.05166327477010026, var"Upper 95%" = 0.14296836379981426)
 ````
 
 According to this model, those individual who were directly exposed to harm became on average more “pro-peace,” not less.
@@ -48,9 +55,8 @@ The main function of the package is the function `sensemakr`. The `sensemakr` fu
 
 In the code chunk below, we apply the function `sensemakr` to our OLS model from statsmodel.
 
-````@example quickstart
+````julia
 darfur_sense = sensemakr(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3], ky = [1, 2, 3], q = 1.0, alpha = 0.05, reduce = true);
-nothing #hide
 ````
 
 The main arguments of the call are:
@@ -71,9 +77,8 @@ The main arguments of the call are:
 
 Using the default arguments, one can simplify the previous call to:
 
-````@example quickstart
+````julia
 darfur_sense = sensemakr(fitted_model, "directlyharmed", benchmark_covariates = "female", kd = [1, 2, 3]);
-nothing #hide
 ````
 
 Once we run `sensemakr`, we can now explore the sensitivity analysis results.
@@ -82,13 +87,33 @@ Once we run `sensemakr`, we can now explore the sensitivity analysis results.
 
 The print method of Sensemakr provides a quick review of the original (unadjusted) estimates along with three summary sensitivity statistics suited for routine reporting: the partial $R^2$ of the treatment with the outcome, the robustness value ($RV$) required to reduce the estimate entirely to zero (i.e. $q=1$), and the RV beyond which the estimate would no longer be statistically distinguishable from zero at the 0.05 level
 
-````@example quickstart
+````julia
 print(darfur_sense)
+````
+
+````
+Sensitivity Analysis to Unobserved Confounding
+
+Model Formula: hhsize_darfur ~ farmer_dar + herder_dar + female + village + peacefactor + age + directlyharmed + pastvoted
+
+Null hypothesis: q = 1.0 and reduce = true
+
+Unadjusted Estimates of "directlyharmed":
+   Coef. Estimate: 0.097
+   Standard Error: 0.023
+   t-value: 4.184
+
+Sensitivity Statistics:
+   Partial R2 of treatment with outcome: 0.022
+   Robustness Value, q = 1.0: 0.139
+   Robustness Value, q = 1.0 alpha = 0.05: 0.076
+
+
 ````
 
 The package also provides a function that outputs code for a latex or html table with these results. If used in an interactive environment, such as a Jupyter notebook, the table is also automatically displayed in the notebook.
 
-````@example quickstart
+````julia
 # html code for minimal reporting table
 ````
 
@@ -106,8 +131,47 @@ Moreover, the bound of $R^2_{D\sim Z\mid X} = .9\%$ is below the partial 𝑅2 o
 
 The summary function of Sensemakr produces verbose output similar to the text explanations above, so that researchers can directly cite or include such texts in their reports.
 
-````@example quickstart
+````julia
 summary(darfur_sense)
+````
+
+````
+Sensitivity Analysis to Unobserved Confounding
+
+Model Formula: hhsize_darfur ~ farmer_dar + herder_dar + female + village + peacefactor + age + directlyharmed + pastvoted
+
+Null hypothesis: q = 1.0 and reduce = true
+-- This means we are considering biases that reduce the absolute value of the current estimate
+-- The null hypothesis deemed problematic is H0:tau = 0.0
+
+Unadjusted Estimates of "directlyharmed":
+   Coef. Estimate: 0.097
+   Standard Error: 0.023
+   t-value: 4.184
+Sensitivity Statistics:
+   Partial R2 of treatment with outcome: 0.022
+   Robustness Value, q = 1.0: 0.139
+   Robustness Value, q = 1.0 alpha = 0.05: 0.076
+
+Verbal interpretation of sensitivity statistics:
+
+-- Partial R2 of the treatment with the outcome: an extreme confounder (orthogonal to the covariates) that explains 100% of the residual variance of the outcome, would need to explain at least 2.187 % of the residual variance of the treatment to fully account for the observed estimated effect.
+
+-- Robustness Value, q = 1.0: unobserved confounders (orthogonal to the covariates) that of both the treatment and the outcome are strong enough to bring the point estimate to 0.0 (a bias of 100.0% of the original estimate). Conversely, unobserved confounders that do not explain more than 13.878% of the residual variance of both the treatment and the outcome are not strong enough to bring the point estimate to 0.0.
+
+-- Robustness Value,q = 1.0, alpha = 0.05: unobserved confounders (orthogonal to the covariates) that explain more than 7.626% of the residual variance of both the treatment and the outcome are strong enough to bring the estimate to a range where it is no longer 'statistically different' from 0.0 (a bias of 100.0% of the original estimate), at the significance level of alpha = 0.05. Conversely, unobserved confounders that do not explain more than7.626% of the residual varianceof both the treatment and the outcome are not strong enough to bring the estimate to a range where it is no longer 'statistically different' from 0.0, at the significance level of alpha = 0.05.
+
+Bounds on omitted variable bias:
+--The table below shows the maximum strength of unobserved confounders with association with the treatment and the outcome bounded by a multiple of the observed explanatory power of the chosen benchmark covariate(s).
+
+3×9 DataFrame
+ Row │ bound_label  r2dz_x      r2yz_dx   treatment       adjusted_estimate  adjusted_se  adjusted_t  adjusted_lower_CI  adjusted_upper_CI
+     │ String       Float64     Float64   String          Float64            Float64      Float64     Float64            Float64
+─────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ 1.0x female  0.00916429  0.124641  directlyharmed          0.0752203    0.0218733     3.4389          0.032283            0.118158
+   2 │ 2.0x female  0.0183286   0.249324  directlyharmed          0.0529152    0.0203501     2.60025         0.012968            0.0928623
+   3 │ 3.0x female  0.0274929   0.37405   directlyharmed          0.030396     0.0186701     1.62806        -0.00625328          0.0670453
+
 ````
 
 ## Sensitivity plot
@@ -116,7 +180,7 @@ Using the plot method for `sensemakr`, we can further refine our sensitivity ana
 
 Let us begin by examining contour plots for the point estimate.
 
-````@example quickstart
+````julia
 plot(darfur_sense)
 ````
 
@@ -126,7 +190,7 @@ The bounds on the strength of confounding, determined by the parameter `kd = [1,
 
 We now examine the sensitivity of the t-value for testing the null hypothesis of zero effect. For this, it suffices to change the option `sensitivity_of = "t-value"`.
 
-````@example quickstart
+````julia
 plot(darfur_sense, sensitivity_of = "t-value")
 ````
 
@@ -136,7 +200,7 @@ The plot reveals that, at the 5% significance level, the null hypothesis of zero
 
 Sometimes researchers may be better equipped to make plausibility judgments about the strength of determinants of the treatment assignment mechanism, and have less knowledge about the determinants of the outcome. In those cases, sensitivity plots using extreme scenarios are a useful option. These are produced with the option `plot_type = "extreme"`. Here one assumes confounding explains all or some large fraction of the residual variance of the outcome, then vary how strongly such confounding is hypothetically related to the treatment, to see how this affects the resulting point estimate.
 
-````@example quickstart
+````julia
 plot(darfur_sense, plot_type = "extreme")
 ````
 
