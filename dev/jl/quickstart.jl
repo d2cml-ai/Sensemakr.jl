@@ -95,6 +95,8 @@ summary(darfur_sense)
 
 plot(darfur_sense)
 
+# ![Figure_1](images/Figure_1.png)
+#
 # The horizontal axis shows the hypothetical residual share of variation of the treatment that unobserved confounding explains, $R^2_{D\sim Z| {\bf X} }$. The vertical axis shows the hypothetical partial $R^2$ of unobserved confounding with the outcome, $R^2_{Y\sim Z| {\bf X}, D}$. The contours show what would be the estimate for `directlyharmed` that one would have obtained in the full regression model including unobserved confounders with such hypothetical strengths. Note the plot is parameterized in way that hurts our preferred hypothesis, by pulling the estimate towards zero—the direction of the bias was set in the argument `reduce = true` of `sensemakr()`.
 #
 # The bounds on the strength of confounding, determined by the parameter `kd = [1, 2, 3]` in the call for `sensemakr()`, are also shown in the plot. Note that the plot reveals that the direction of the effect (positive) is robust to confounding once, twice or even three times as strong as the observed covariate `female`, although in this last case the magnitude of the effect is reduced to a third of the original estimate.
@@ -103,6 +105,8 @@ plot(darfur_sense)
 
 plot(darfur_sense, sensitivity_of = "t-value")
 
+# ![Figure_2](images/Figure_2.png)
+#
 # The plot reveals that, at the 5% significance level, the null hypothesis of zero effect would still be rejected given confounders once or twice as strong as `female`. However, by contrast to the point-estimate, accounting for sampling uncertainty now means that the null hypothesis of zero effect would not be rejected with the inclusion of a confounder three times as strong as `female`.
 #
 # ## Sensitivity to extreme scenarios
@@ -111,6 +115,8 @@ plot(darfur_sense, sensitivity_of = "t-value")
 
 plot(darfur_sense, plot_type = "extreme")
 
+# ![Figure_3](images/Figure_3.png)
+#
 # ## References
 #
 # Cinelli, C. Hazlett, C. (2020) “Making Sense of Sensitivity: Extending Omitted Variable Bias”. Journal of the Royal Statistical Society, Series B (Statistical Methodology).
