@@ -2,7 +2,7 @@
 
 julia_version = "1.8.1"
 manifest_format = "2.0"
-project_hash = "d81555ad6fd7451da7cd095521ef29e58dbd8635"
+project_hash = "7cfc7d62efd6b4f92a04e8e03ebb55ce1b64e781"
 
 [[deps.ANSIColoredPrinters]]
 git-tree-sha1 = "574baf8110975760d391c710b6341da1afa48d8c"
@@ -266,12 +266,6 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 [[deps.LinearAlgebra]]
 deps = ["Libdl", "libblastrampoline_jll"]
 uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-
-[[deps.Literate]]
-deps = ["Base64", "IOCapture", "JSON", "REPL"]
-git-tree-sha1 = "1c4418beaa6664041e0f9b48f0710f57bff2fcbe"
-uuid = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
-version = "2.14.0"
 
 [[deps.LogExpFunctions]]
 deps = ["ChainRulesCore", "ChangesOfVariables", "DocStringExtensions", "InverseFunctions", "IrrationalConstants", "LinearAlgebra"]

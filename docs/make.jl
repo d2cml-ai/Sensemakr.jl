@@ -1,7 +1,5 @@
 using Sensemakr
-using Documenter, Literate
-
-Literate.markdown("docs/src/jl/quickstart.jl", "docs/src", documenter = true, execute = true)
+using Documenter
 
 DocMeta.setdocmeta!(Sensemakr, :DocTestSetup, :(using Sensemakr); recursive=true)
 
