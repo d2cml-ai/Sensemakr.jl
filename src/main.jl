@@ -289,11 +289,11 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display:
         "<tr>\n" * 
         "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
         "Note: df = " * string(sense_obj.sensitivity_statistics["dof"]) * "; " * 
-        "Bound ( " * string(sense_obj.bounds["bound_label"][1]) * " ):  " * 
+        "Bound ( " * string(sense_obj.bounds[:, "bound_label"][1]) * " ):  " * 
         "R<sup>2</sup><sub>Y~Z|X,D</sub> =  " * 
-        string(round(sense_obj.bounds["r2yz_dx"][1] * 100, digits = digits - 2)) * 
+        string(round(sense_obj.bounds[:, "r2yz_dx"][1] * 100, digits = digits - 2)) * 
         "%, R<sup>2</sup><sub>D~Z|X</sub> =" * 
-        string(round(sense_obj.bounds["r2dz_x"][1] * 100, digits = digits - 2)) * 
+        string(round(sense_obj.bounds[:, "r2dz_x"][1] * 100, digits = digits - 2)) * 
         "%" *  
         "</td>\n" * 
         "</tr>\n" * 
