@@ -303,9 +303,11 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
         "</table>"
     end
 
-    result = HTML(result)
+    
     if res_display
-        display(result)
+        result = HTML(result)
+        return result
+    else
+        return result
     end
-    return result
 end

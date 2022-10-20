@@ -70,6 +70,7 @@ print(darfur_sense)
 # The package also provides a function that outputs code for a latex or html table with these results. If used in an interactive environment, such as a Jupyter notebook, the table is also automatically displayed in the notebook.
 
 ## html code for minimal reporting table
+ovb_minimal_reporting(darfur_sense)
 
 # These three sensitivity statistics provide a minimal reporting for sensitivity analysis. More precisely:
 #

@@ -24,7 +24,7 @@ first(darfur, 5)
 ````
 
 ```@raw html
-<div class="data-frame"><p>5 rows × 14 columns</p><table class="data-frame"><thead><tr><th></th><th>wouldvote</th><th>peacefactor</th><th>peace_formerenemies</th><th>peace_jjindiv</th><th>peace_jjtribes</th><th>gos_soldier_execute</th><th>directlyharmed</th><th>age</th><th>farmer_dar</th><th>herder_dar</th><th>pastvoted</th><th>hhsize_darfur</th><th>village</th><th>female</th></tr><tr><th></th><th title="Int64">Int64</th><th title="Float64">Float64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="Int64">Int64</th><th title="InlineStrings.String31">String31</th><th title="Int64">Int64</th></tr></thead><tbody><tr><th>1</th><td>0</td><td>1.0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>30</td><td>0</td><td>0</td><td>1</td><td>23</td><td>Abdel Khair</td><td>0</td></tr><tr><th>2</th><td>0</td><td>0.706831</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>20</td><td>1</td><td>0</td><td>1</td><td>5</td><td>Abdi Dar</td><td>1</td></tr><tr><th>3</th><td>1</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>45</td><td>1</td><td>0</td><td>0</td><td>15</td><td>Abu Sorog</td><td>0</td></tr><tr><th>4</th><td>1</td><td>0.495178</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>55</td><td>0</td><td>0</td><td>0</td><td>9</td><td>Abu Dejaj</td><td>0</td></tr><tr><th>5</th><td>0</td><td>0.0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>25</td><td>1</td><td>0</td><td>1</td><td>7</td><td>Abu Dejaj</td><td>1</td></tr></tbody></table></div>
+<div><div style = "float: left;"><span>5×14 DataFrame</span></div><div style = "clear: both;"></div></div><div class = "data-frame" style = "overflow-x: scroll;"><table class = "data-frame" style = "margin-bottom: 6px;"><thead><tr class = "header"><th class = "rowNumber" style = "font-weight: bold; text-align: right;">Row</th><th style = "text-align: left;">wouldvote</th><th style = "text-align: left;">peacefactor</th><th style = "text-align: left;">peace_formerenemies</th><th style = "text-align: left;">peace_jjindiv</th><th style = "text-align: left;">peace_jjtribes</th><th style = "text-align: left;">gos_soldier_execute</th><th style = "text-align: left;">directlyharmed</th><th style = "text-align: left;">age</th><th style = "text-align: left;">farmer_dar</th><th style = "text-align: left;">herder_dar</th><th style = "text-align: left;">pastvoted</th><th style = "text-align: left;">hhsize_darfur</th><th style = "text-align: left;">village</th><th style = "text-align: left;">female</th></tr><tr class = "subheader headerLastRow"><th class = "rowNumber" style = "font-weight: bold; text-align: right;"></th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Float64" style = "text-align: left;">Float64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "Int64" style = "text-align: left;">Int64</th><th title = "InlineStrings.String31" style = "text-align: left;">String31</th><th title = "Int64" style = "text-align: left;">Int64</th></tr></thead><tbody><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1.0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">1</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">30</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">23</td><td style = "text-align: left;">Abdel Khair</td><td style = "text-align: right;">0</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">2</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0.706831</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">20</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">5</td><td style = "text-align: left;">Abdi Dar</td><td style = "text-align: right;">1</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">3</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0.0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">45</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">15</td><td style = "text-align: left;">Abu Sorog</td><td style = "text-align: right;">0</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">4</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0.495178</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">55</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">9</td><td style = "text-align: left;">Abu Dejaj</td><td style = "text-align: right;">0</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">5</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0.0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">1</td><td style = "text-align: right;">25</td><td style = "text-align: right;">1</td><td style = "text-align: right;">0</td><td style = "text-align: right;">1</td><td style = "text-align: right;">7</td><td style = "text-align: left;">Abu Dejaj</td><td style = "text-align: right;">1</td></tr></tbody></table></div>
 ```
 
 A natural approach for such problem is to run the following linear regression model, where we regress `peacefactor` on `directlyharmed`, further adjusting for `village`, `female` as well as other covariates. Here we run this regression using `GLM`
@@ -83,7 +83,7 @@ darfur_sense = sensemakr(fitted_model, "directlyharmed", benchmark_covariates = 
 
 Once we run `sensemakr`, we can now explore the sensitivity analysis results.
 
-## Minimal sensitivity reporting
+### Minimal sensitivity reporting
 
 The print method of Sensemakr provides a quick review of the original (unadjusted) estimates along with three summary sensitivity statistics suited for routine reporting: the partial $R^2$ of the treatment with the outcome, the robustness value ($RV$) required to reduce the estimate entirely to zero (i.e. $q=1$), and the RV beyond which the estimate would no longer be statistically distinguishable from zero at the 0.05 level
 
@@ -94,7 +94,7 @@ print(darfur_sense)
 ````
 Sensitivity Analysis to Unobserved Confounding
 
-Model Formula: hhsize_darfur ~ farmer_dar + herder_dar + female + village + peacefactor + age + directlyharmed + pastvoted
+Model Formula: peacefactor ~ 1 + directlyharmed + age + farmer_dar + herder_dar + pastvoted + hhsize_darfur + female + village
 
 Null hypothesis: q = 1.0 and reduce = true
 
@@ -115,6 +115,11 @@ The package also provides a function that outputs code for a latex or html table
 
 ````julia
 # html code for minimal reporting table
+ovb_minimal_reporting(darfur_sense)
+````
+
+````
+"<table style = 'align:center'>\n<thead\n<tr>\t<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:peacefactor</tr>\n</tr>\n<tr>\n\t<th style='text-align:left;border-top: 1px solid black'> Treatment </th>\n\t<th style='text-align:right;border-top: 1px solid black'> Est. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> S.E. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> t-value </th>\n\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q 1.0</sub> </th>\n</tr>\n</thead>\n<tbody>\n <tr> \n\t<td style 'text-alighn:left;border-bottom: 1px solid black'><i>directlyharmed</i></td>\n\t<td style='text-align:right;border-bottom: 1px solid black'>0.097 </td>\n"
 ````
 
 These three sensitivity statistics provide a minimal reporting for sensitivity analysis. More precisely:
@@ -138,7 +143,7 @@ summary(darfur_sense)
 ````
 Sensitivity Analysis to Unobserved Confounding
 
-Model Formula: hhsize_darfur ~ farmer_dar + herder_dar + female + village + peacefactor + age + directlyharmed + pastvoted
+Model Formula: peacefactor ~ 1 + directlyharmed + age + farmer_dar + herder_dar + pastvoted + hhsize_darfur + female + village
 
 Null hypothesis: q = 1.0 and reduce = true
 -- This means we are considering biases that reduce the absolute value of the current estimate
@@ -148,6 +153,7 @@ Unadjusted Estimates of "directlyharmed":
    Coef. Estimate: 0.097
    Standard Error: 0.023
    t-value: 4.184
+
 Sensitivity Statistics:
    Partial R2 of treatment with outcome: 0.022
    Robustness Value, q = 1.0: 0.139
@@ -174,7 +180,7 @@ Bounds on omitted variable bias:
 
 ````
 
-## Sensitivity plot
+### Sensitivity contour plots
 
 Using the plot method for `sensemakr`, we can further refine our sensitivity analysis by visually exploring the whole range of possible estimates that confounders with different strengths could cause.
 
@@ -200,7 +206,7 @@ plot(darfur_sense, sensitivity_of = "t-value")
 
 The plot reveals that, at the 5% significance level, the null hypothesis of zero effect would still be rejected given confounders once or twice as strong as `female`. However, by contrast to the point-estimate, accounting for sampling uncertainty now means that the null hypothesis of zero effect would not be rejected with the inclusion of a confounder three times as strong as `female`.
 
-## Sensitivity to extreme scenarios
+### Sensitivity to extreme scenarios
 
 Sometimes researchers may be better equipped to make plausibility judgments about the strength of determinants of the treatment assignment mechanism, and have less knowledge about the determinants of the outcome. In those cases, sensitivity plots using extreme scenarios are a useful option. These are produced with the option `plot_type = "extreme"`. Here one assumes confounding explains all or some large fraction of the residual variance of the outcome, then vary how strongly such confounding is hypothetically related to the treatment, to see how this affects the resulting point estimate.
 
@@ -209,6 +215,8 @@ plot(darfur_sense, plot_type = "extreme")
 ````
 
 ![Figure_3](images/Figure_3.png)
+
+This extreme scenarios plot sets the association of confounders with the outcome to $R^2_{Y\sim Z| {\bf X}, D}$=100%, $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50% (producing three separate curves). The bounds on the strength of association of a confounder once, twice or three times as strongly associated with the treatment as `female` are shown as red ticks in the horizontal axis. As the plot shows, even in the most extreme case of $R^2_{Y\sim Z| {\bf X}, D}$=100%, confounders would need to be more than twice as strongly associated with the treatment to fully explain away the point estimate. Moving to the scenarios $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50%, confounders would need to be more than three times as strongly associated with the treatment as was female in order to fully explain away the point estimate.
 
 ## References
 
