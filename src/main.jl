@@ -264,7 +264,7 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display:
     "\t<td style 'text-alighn:left;border-bottom: 1px solid black'><i>" * 
     string(sense_obj.treatment) * "</i></td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_statistics[estimate][1], digits = digits)) * " </td>\n"
+    string(round(sense_obj.sensitivity_statistics["estimate"][1], digits = digits)) * " </td>\n"
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
     string(round(sense_obj.sensitivity_stats["se"][1], digits = digits)) * " </td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
