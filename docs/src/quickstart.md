@@ -118,9 +118,9 @@ The package also provides a function that outputs code for a latex or html table
 ovb_minimal_reporting(darfur_sense)
 ````
 
-````
-"<table style = 'align:center'>\n<thead\n<tr>\t<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:peacefactor</tr>\n</tr>\n<tr>\n\t<th style='text-align:left;border-top: 1px solid black'> Treatment </th>\n\t<th style='text-align:right;border-top: 1px solid black'> Est. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> S.E. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> t-value </th>\n\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q 1.0</sub> </th>\n</tr>\n</thead>\n<tbody>\n <tr> \n\t<td style 'text-alighn:left;border-bottom: 1px solid black'><i>directlyharmed</i></td>\n\t<td style='text-align:right;border-bottom: 1px solid black'>0.097 </td>\n"
-````
+```@raw html
+<table style = 'align:center'>\n<thead\n<tr>\t<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:peacefactor</tr>\n</tr>\n<tr>\n\t<th style='text-align:left;border-top: 1px solid black'> Treatment </th>\n\t<th style='text-align:right;border-top: 1px solid black'> Est. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> S.E. </th>\n\t<th style='text-align:right;border-top: 1px solid black'> t-value </th>\n\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q 1.0</sub> </th>\n</tr>\n</thead>\n<tbody>\n <tr> \n\t<td style 'text-alighn:left;border-bottom: 1px solid black'><i>directlyharmed</i></td>\n\t<td style='text-align:right;border-bottom: 1px solid black'>0.097 </td>\n
+```
 
 These three sensitivity statistics provide a minimal reporting for sensitivity analysis. More precisely:
 
