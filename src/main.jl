@@ -242,3 +242,67 @@ function Base.print(sense_obj::sensemakr, digits = 3)
     println("   Robustness Value, q = ", sense_obj.q, " alpha = ", sense_obj.alpha, ": ", round(sense_obj.sensitivity_statistics["rv_qa"][1], digits = digits), "\n")
 end
 
+function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display::Boolean = true)
+
+    result = "<table style = 'align:center'>\n" * "<thead\n" * 
+    "<tr>" * 
+    "\t<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n" * 
+    "\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:" * 
+    string(sense_obj.model.mf.f.lhs) * "</tr>\n" * 
+    "</tr>\n" * 
+    "<tr>\n" * 
+    "\t<th style='text-align:left;border-top: 1px solid black'> Treatment </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> Est. </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> S.E. </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> t-value </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q " * 
+    string(sense_obj.q) * "</sub> </th>\n" * 
+    "</tr>\n" * 
+    "</thead>\n" * 
+    "<tbody>\n <tr> \n" * 
+    "\t<td style 'text-alighn:left;border-bottom: 1px solid black'><i>" * 
+    string(sense_obj.treatment) * "</i></td>\n" * 
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_statistics[estimate][1], digits = digits)) * " </td>\n"
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_stats["se"][1], digits = digits)) * " </td>\n" * 
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_stats["t_statistic"][1], digits = digits)) * " </td>\n" * 
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_stats["r2yd_x"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_stats["rv_q"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
+    "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
+    string(round(sense_obj.sensitivity_stats["rv_qa"][1] * 100, digits = digits - 2)) * "% </td>\n" *
+    "</tr>\n</tbody>\n" 
+    
+    if isnothing(sense_obj.bounds)
+        result = result * 
+        "<tr>\n" * 
+        "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
+        "Note: df = " * string(sense_obj.sensitivity_stats["dof"]) *  
+        "</td>\n" * 
+        "</tr>\n" * 
+        "</table>"
+    else
+        "<tr>\n" * 
+        "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
+        "Note: df = " * string(sense_obj.sensitivity_stats["dof"]) * "; " * 
+        "Bound ( " * string(sense_obj.bounds["bound_label"][1]) * " ):  " * 
+        "R<sup>2</sup><sub>Y~Z|X,D</sub> =  " * 
+        string(round(sense_obj.bounds["r2yz_dx"][1] * 100, digits = digits - 2)) * 
+        "%, R<sup>2</sup><sub>D~Z|X</sub> =" * 
+        string(round(sense_obj.bounds["r2dz_x"][1] * 100, digits = digits - 2)) * 
+        "%" *  
+        "</td>\n" * 
+        "</tr>\n" * 
+        "</table>"
+    end
+
+    #= result = HTML(result)
+    if display
+        display(result)
+    end =#
+    return result
+end

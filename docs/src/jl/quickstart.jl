@@ -61,7 +61,7 @@ darfur_sense = sensemakr(fitted_model, "directlyharmed", benchmark_covariates = 
 
 # Once we run `sensemakr`, we can now explore the sensitivity analysis results.
 #
-# ## Minimal sensitivity reporting
+# ### Minimal sensitivity reporting
 #
 # The print method of Sensemakr provides a quick review of the original (unadjusted) estimates along with three summary sensitivity statistics suited for routine reporting: the partial $R^2$ of the treatment with the outcome, the robustness value ($RV$) required to reduce the estimate entirely to zero (i.e. $q=1$), and the RV beyond which the estimate would no longer be statistically distinguishable from zero at the 0.05 level
 
@@ -87,7 +87,7 @@ print(darfur_sense)
 
 summary(darfur_sense)
 
-# ## Sensitivity plot
+# ### Sensitivity contour plots
 #
 # Using the plot method for `sensemakr`, we can further refine our sensitivity analysis by visually exploring the whole range of possible estimates that confounders with different strengths could cause.
 #
@@ -109,13 +109,15 @@ plot(darfur_sense, sensitivity_of = "t-value")
 #
 # The plot reveals that, at the 5% significance level, the null hypothesis of zero effect would still be rejected given confounders once or twice as strong as `female`. However, by contrast to the point-estimate, accounting for sampling uncertainty now means that the null hypothesis of zero effect would not be rejected with the inclusion of a confounder three times as strong as `female`.
 #
-# ## Sensitivity to extreme scenarios
+# ### Sensitivity to extreme scenarios
 #
 # Sometimes researchers may be better equipped to make plausibility judgments about the strength of determinants of the treatment assignment mechanism, and have less knowledge about the determinants of the outcome. In those cases, sensitivity plots using extreme scenarios are a useful option. These are produced with the option `plot_type = "extreme"`. Here one assumes confounding explains all or some large fraction of the residual variance of the outcome, then vary how strongly such confounding is hypothetically related to the treatment, to see how this affects the resulting point estimate.
 
 plot(darfur_sense, plot_type = "extreme")
 
 # ![Figure_3](images/Figure_3.png)
+#
+# This extreme scenarios plot sets the association of confounders with the outcome to $R^2_{Y\sim Z| {\bf X}, D}$=100%, $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50% (producing three separate curves). The bounds on the strength of association of a confounder once, twice or three times as strongly associated with the treatment as `female` are shown as red ticks in the horizontal axis. As the plot shows, even in the most extreme case of $R^2_{Y\sim Z| {\bf X}, D}$=100%, confounders would need to be more than twice as strongly associated with the treatment to fully explain away the point estimate. Moving to the scenarios $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50%, confounders would need to be more than three times as strongly associated with the treatment as was female in order to fully explain away the point estimate.
 #
 # ## References
 #
