@@ -247,7 +247,7 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
     result = "<table style = 'align:center'>\n" * "<thead\n" * 
     "<tr>" * 
     "\t<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n" * 
-    "\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:" * 
+    "\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black'> Outcome:" * 
     string(sense_obj.model.mf.f.lhs) * "</tr>\n" * 
     "</tr>\n" * 
     "<tr>\n" * 
@@ -256,9 +256,9 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
     "\t<th style='text-align:right;border-top: 1px solid black'> S.E. </th>\n" * 
     "\t<th style='text-align:right;border-top: 1px solid black'> t-value </th>\n" * 
     "\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n" * 
-    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q " * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q = " * 
     string(sense_obj.q) * "</sub> </th>\n" * 
-    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q " * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q = " * 
     string(sense_obj.q) * ", &alpha; = " * 
     string(sense_obj.alpha) * "</sub> </th>\n" * 
     "</tr>\n" * 
