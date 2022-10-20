@@ -242,7 +242,7 @@ function Base.print(sense_obj::sensemakr, digits = 3)
     println("   Robustness Value, q = ", sense_obj.q, " alpha = ", sense_obj.alpha, ": ", round(sense_obj.sensitivity_statistics["rv_qa"][1], digits = digits), "\n")
 end
 
-function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display::Boolean = true)
+function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display::Bool = true)
 
     result = "<table style = 'align:center'>\n" * "<thead\n" * 
     "<tr>" * 
