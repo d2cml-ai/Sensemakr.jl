@@ -119,7 +119,33 @@ ovb_minimal_reporting(darfur_sense)
 ````
 
 ```@raw html
-<table style = 'align:center'><thead<tr><th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th><th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black>'> Outcome:peacefactor</tr></tr><tr><th style='text-align:left;border-top: 1px solid black'> Treatment </th><th style='text-align:right;border-top: 1px solid black'> Est. </th><th style='text-align:right;border-top: 1px solid black'> S.E. </th><th style='text-align:right;border-top: 1px solid black'> t-value </th><th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th><th style='text-align:right;border-top: 1px solid black'> RV<sub>q 1.0</sub> </th></tr></thead><tbody> <tr> <td style 'text-alighn:left;border-bottom: 1px solid black'><i>directlyharmed</i></td><td style='text-align:right;border-bottom: 1px solid black'>0.097 </td>
+<table style = 'align:center'>
+<thead
+<tr>	<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>
+	<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black'> Outcome: peacefactor</tr>
+</tr>
+<tr>
+	<th style='text-align:left;border-top: 1px solid black'> Treatment </th>
+	<th style='text-align:right;border-top: 1px solid black'> Est. </th>
+	<th style='text-align:right;border-top: 1px solid black'> S.E. </th>
+	<th style='text-align:right;border-top: 1px solid black'> t-value </th>
+	<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>
+	<th style='text-align:right;border-top: 1px solid black'> RV<sub>q = 1.0</sub> </th>
+	<th style='text-align:right;border-top: 1px solid black'> RV<sub>q = 1.0, &alpha; = 0.05</sub> </th>
+</tr>
+</thead>
+<tbody>
+ <tr> 
+	<td style 'text-alighn:left;border-bottom: 1px solid black'><i>directlyharmed</i></td>
+	<td style='text-align:right;border-bottom: 1px solid black'>0.097 </td>
+	<td style='text-align:right;border-bottom: 1px solid black'>0.023 </td>
+	<td style='text-align:right;border-bottom: 1px solid black'>4.184 </td>
+	<td style='text-align:right;border-bottom: 1px solid black'>2.2% </td>
+	<td style='text-align:right;border-bottom: 1px solid black'>13.9% </td>
+	<td style='text-align:right;border-bottom: 1px solid black'>7.6% </td>
+</tr>
+</tbody>
+
 ```
 
 These three sensitivity statistics provide a minimal reporting for sensitivity analysis. More precisely:
