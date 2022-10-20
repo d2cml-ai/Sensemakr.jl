@@ -266,29 +266,29 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, display:
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
     string(round(sense_obj.sensitivity_statistics["estimate"][1], digits = digits)) * " </td>\n"
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_stats["se"][1], digits = digits)) * " </td>\n" * 
+    string(round(sense_obj.sensitivity_statistics["se"][1], digits = digits)) * " </td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_stats["t_statistic"][1], digits = digits)) * " </td>\n" * 
+    string(round(sense_obj.sensitivity_statistics["t_statistic"][1], digits = digits)) * " </td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_stats["r2yd_x"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
+    string(round(sense_obj.sensitivity_statistics["r2yd_x"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_stats["rv_q"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
+    string(round(sense_obj.sensitivity_statistics["rv_q"][1] * 100, digits = digits - 2)) * "% </td>\n" * 
     "\t<td style='text-align:right;border-bottom: 1px solid black'>" * 
-    string(round(sense_obj.sensitivity_stats["rv_qa"][1] * 100, digits = digits - 2)) * "% </td>\n" *
+    string(round(sense_obj.sensitivity_statistics["rv_qa"][1] * 100, digits = digits - 2)) * "% </td>\n" *
     "</tr>\n</tbody>\n" 
     
     if isnothing(sense_obj.bounds)
         result = result * 
         "<tr>\n" * 
         "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
-        "Note: df = " * string(sense_obj.sensitivity_stats["dof"]) *  
+        "Note: df = " * string(sense_obj.sensitivity_statistics["dof"]) *  
         "</td>\n" * 
         "</tr>\n" * 
         "</table>"
     else
         "<tr>\n" * 
         "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
-        "Note: df = " * string(sense_obj.sensitivity_stats["dof"]) * "; " * 
+        "Note: df = " * string(sense_obj.sensitivity_statistics["dof"]) * "; " * 
         "Bound ( " * string(sense_obj.bounds["bound_label"][1]) * " ):  " * 
         "R<sup>2</sup><sub>Y~Z|X,D</sub> =  " * 
         string(round(sense_obj.bounds["r2yz_dx"][1] * 100, digits = digits - 2)) * 
