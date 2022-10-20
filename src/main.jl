@@ -258,6 +258,9 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
     "\t<th style='text-align:right;border-top: 1px solid black'> R<sup>2</sup><sub>Y~D|X</sub> </th>\n" * 
     "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q " * 
     string(sense_obj.q) * "</sub> </th>\n" * 
+    "\t<th style='text-align:right;border-top: 1px solid black'> RV<sub>q " * 
+    string(sense_obj.q) * ", &alpha; = " * 
+    string(sense_obj.alpha) * "</sub> </th>\n" * 
     "</tr>\n" * 
     "</thead>\n" * 
     "<tbody>\n <tr> \n" * 
