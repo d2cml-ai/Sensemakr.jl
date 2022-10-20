@@ -247,7 +247,7 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
     result = "<table style = 'align:center'>\n" * "<thead\n" * 
     "<tr>" * 
     "\t<th style='text-align:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>\n" * 
-    "\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black'> Outcome: " * 
+    "\t<th colspan = 6 style='text-align:center;border-bottom: 1px solid black; border-top: 1px solid black'> Outcome: " * 
     string(sense_obj.model.mf.f.lhs) * "</tr>\n" * 
     "</tr>\n" * 
     "<tr>\n" * 
@@ -289,7 +289,7 @@ function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_disp
         "</tr>\n" * 
         "</table>"
     else
-        "<tr>\n" * 
+        result = result * "<tr>\n" * 
         "<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>" * 
         "Note: df = " * string(sense_obj.sensitivity_statistics["dof"]) * "; " * 
         "Bound ( " * string(sense_obj.bounds[:, "bound_label"][1]) * " ):  " * 
