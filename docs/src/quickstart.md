@@ -121,8 +121,8 @@ ovb_minimal_reporting(darfur_sense)
 ```@raw html
 <table style = 'align:center'>
 <thead
-<tr>	<th style='text-alighn:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>
-	<th colspan = 6 style='text-align:center;border-bottom: 1px solid black border-top: 1px solid black'> Outcome: peacefactor</tr>
+<tr>	<th style='text-align:center;border-bottom: 1px solid black;border-top: 1px solid black> </th>
+	<th colspan = 6 style='text-align:center;border-bottom: 1px solid black; border-top: 1px solid black'> Outcome: peacefactor</tr>
 </tr>
 <tr>
 	<th style='text-align:left;border-top: 1px solid black'> Treatment </th>
@@ -145,7 +145,10 @@ ovb_minimal_reporting(darfur_sense)
 	<td style='text-align:right;border-bottom: 1px solid black'>7.6% </td>
 </tr>
 </tbody>
-
+<tr>
+<td colspan = 7 style='text-align:right;border-top: 1px solid black;border-bottom: 1px solid transparent;font-size:11px'>Note: df = 783; Bound ( 1.0x female ):  R<sup>2</sup><sub>Y~Z|X,D</sub> =  12.5%, R<sup>2</sup><sub>D~Z|X</sub> =0.9%</td>
+</tr>
+</table>
 ```
 
 These three sensitivity statistics provide a minimal reporting for sensitivity analysis. More precisely:
