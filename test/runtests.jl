@@ -35,6 +35,6 @@ const path = joinpath(dirname(@__FILE__), "..", "data", "darfur.csv");
 
     @test adjusted_t(0.05, 0.05, model = fitted_model, treatment = "directlyharmed")[1] ≈ 2.7472406497513093 atol = atol
 
-    @test obv_bounds(fitted_model, "directlyharmed", benchmark_covariates = ["female", "pastvoted"], kd = [1, 2, 3]) isa DataFrame
+    @test ovb_bounds(fitted_model, "directlyharmed", benchmark_covariates = ["female", "pastvoted"], kd = [1, 2, 3]) isa DataFrame
 end
 
