@@ -289,8 +289,8 @@ function extract_from_sense_obj(sense_obj::sensemakr)
     return treatment, estimate, se, dof, r2dz_x, r2yz_dx, bound_label, reduce, thr, t_thr, benchmark_covariates, kd, ky
 end
 
-function add_bound_to_contour(; kd = 1, ky = nothing, r2dz_x, r2yz_dx, bound_value = nothing, bound_label = nothing, sensitivity_of = nothing, 
-    label_text = true, label_bump_x = nothing, label_bump_y = nothing, round_dig = 3)
+function add_bound_to_contour(; kd = 1, ky = nothing, r2dz_x::Union{Real, Array{<:Real}}, r2yz_dx::Union{Real, Array{<:Real}}, bound_value = nothing, 
+    bound_label = nothing, sensitivity_of = nothing, label_text = true, label_bump_x = nothing, label_bump_y = nothing, round_dig = 3)
 
     if r2dz_x isa Real
         r2dz_x = [r2dz_x]
@@ -318,6 +318,15 @@ function add_bound_to_contour(; kd = 1, ky = nothing, r2dz_x, r2yz_dx, bound_val
         end
     end
 
+end
+
+function add_bound_to_contour(; bound::DataFrame, kd = 1, ky = nothing, bound_value = nothing, bound_label = nothing, sensitivity_of = nothing, 
+    label_text = true, label_bump_x = nothing, label_bump_y = nothing, round_dig = 3)
+
+    r2dz_x = bounds[:, "r2dz_x"]
+    r2yz_dx = bounds[:, "r2yz_dx"]
+
+    add_bound_to_contour(kd = ky, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, bound_value = bound_value, bound_label = bound_label, sensitivity_of = sensitivity_of, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, round_dig = round_dig)
 end
 
 function check_params(estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label_bump_y)
