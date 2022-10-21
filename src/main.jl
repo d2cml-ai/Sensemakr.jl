@@ -83,7 +83,7 @@ function sensemakr(model::StatsModels.TableRegressionModel, treatment::String; b
     end
 
     if !isnothing(benchmark_covariates)
-        bench_bounds = obv_bounds(model, treatment; benchmark_covariates, kd, ky, alpha, h0, reduce)
+        bench_bounds = ovb_bounds(model, treatment; benchmark_covariates, kd, ky, alpha, h0, reduce)
     elseif !isnothing(r2dxj_x)
         if isnothing(benchmark_covariates)
             benchmark_covariates = "manual_benchmark"
@@ -199,7 +199,7 @@ function plot(sense_obj::sensemakr; plot_type = "contour", kwargs...)
 
 end
 
-function obv_bounds(sense_obj::sensemakr)
+function ovb_bounds(sense_obj::sensemakr)
     
     model = sense_obj.model
     treatment = sense_obj.treatment
@@ -212,7 +212,7 @@ function obv_bounds(sense_obj::sensemakr)
     bound = sense_obj.bound
     adjusted_estimates = sense_obj.adjusted_estimates
 
-    return obv_bounds(model, treatment; benchmark_covariates, kd, ky, alpha, h0, reduce, bound, adjusted_estimates)
+    return ovb_bounds(model, treatment; benchmark_covariates, kd, ky, alpha, h0, reduce, bound, adjusted_estimates)
 end
 
 function Base.print(sense_obj::sensemakr, digits = 3)

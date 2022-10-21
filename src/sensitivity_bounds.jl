@@ -1,4 +1,4 @@
-function obv_bounds(model, treatment; benchmark_covariates = nothing, kd = 1, ky = nothing, alpha::Float64 = 0.05, 
+function ovb_bounds(model, treatment; benchmark_covariates = nothing, kd = 1, ky = nothing, alpha::Float64 = 0.05, 
     h0 = 0, reduce = true, bound = "partial_r2", adjusted_estimates::Bool = true)
 
     if isnothing(ky)

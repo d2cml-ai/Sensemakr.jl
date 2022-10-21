@@ -237,7 +237,7 @@ function extract_from_model(model, treatment, benchmark_covariates, kd, ky, r2dz
     if isnothing(benchmark_covariates)
         return estimate, se, dof, r2dz_x, r2yz_dx
     else
-        bench_bounds = obv_bounds(model, treatment, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, adjusted_estimates = false)
+        bench_bounds = ovb_bounds(model, treatment, benchmark_covariates = benchmark_covariates, kd = kd, ky = ky, adjusted_estimates = false)
         if isnothing(r2dz_x)
             bounds = bench_bounds
         else
