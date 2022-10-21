@@ -326,7 +326,7 @@ function add_bound_to_contour(bound::DataFrame; kd = 1, ky = nothing, bound_valu
     r2dz_x = bounds[:, "r2dz_x"]
     r2yz_dx = bounds[:, "r2yz_dx"]
 
-    add_bound_to_contour(kd = ky, ky = ky, r2dz_x = r2dz_x, r2yz_dx = r2yz_dx, bound_value = bound_value, bound_label = bound_label, sensitivity_of = sensitivity_of, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, round_dig = round_dig)
+    add_bound_to_contour(r2dz_x, r2yz_dx, kd = ky, ky = ky, bound_value = bound_value, bound_label = bound_label, sensitivity_of = sensitivity_of, label_text = label_text, label_bump_x = label_bump_x, label_bump_y = label_bump_y, round_dig = round_dig)
 end
 
 function check_params(estimate, r2dz_x, r2yz_dx, lim, lim_y, label_bump_x, label_bump_y)
