@@ -323,6 +323,9 @@ end
 function add_bound_to_contour(bound::DataFrame; kd = 1, ky = nothing, bound_value = nothing, bound_label = nothing, sensitivity_of = nothing, 
     label_text = true, label_bump_x = nothing, label_bump_y = nothing, round_dig = 3)
 
+    if isnothing(bound_label)
+        bound_label = bound[:, "bound_label"]
+    end
     r2dz_x = bound[:, "r2dz_x"]
     r2yz_dx = bound[:, "r2yz_dx"]
 
