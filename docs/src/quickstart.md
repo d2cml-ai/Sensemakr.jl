@@ -247,6 +247,10 @@ plot(darfur_sense, plot_type = "extreme")
 
 This extreme scenarios plot sets the association of confounders with the outcome to $R^2_{Y\sim Z| {\bf X}, D}$=100%, $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50% (producing three separate curves). The bounds on the strength of association of a confounder once, twice or three times as strongly associated with the treatment as `female` are shown as red ticks in the horizontal axis. As the plot shows, even in the most extreme case of $R^2_{Y\sim Z| {\bf X}, D}$=100%, confounders would need to be more than twice as strongly associated with the treatment to fully explain away the point estimate. Moving to the scenarios $R^2_{Y\sim Z| {\bf X}, D}$=75% and $R^2_{Y\sim Z| {\bf X}, D}$=50%, confounders would need to be more than three times as strongly associated with the treatment as was female in order to fully explain away the point estimate.
 
+## Going further
+
+The basic functionality demonstrated here will likely suffice for most users, most of the time. Sometimes, however, more flexibility will be needed in a given project. When this happens, researchers may resort directly to the functions defined in the other modules of the package. Those functions can be found in the Modules documentation, and we also provide some examples of how they can be used in the next notebook.
+
 ## References
 
 Cinelli, C. Hazlett, C. (2020) “Making Sense of Sensitivity: Extending Omitted Variable Bias”. Journal of the Royal Statistical Society, Series B (Statistical Methodology).
