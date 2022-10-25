@@ -12,7 +12,8 @@ The Julia version of the package closely mirrors the R version, which can be fou
 
 ```@contents
 Pages = [
-    "quickstart.md"
+    "quickstart.md",
+    "advanced_use.md"
 ]
 Depth = 2
 ```

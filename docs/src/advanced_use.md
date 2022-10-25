@@ -70,11 +70,11 @@ println(r2(model_ydx))
 ──────────────────────────────────────────────────────────────────────────
                    Coef.  Std. Error     t  Pr(>|t|)  Lower 95%  Upper 95%
 ──────────────────────────────────────────────────────────────────────────
-(Intercept)  3.05311e-17   0.123731   0.00    1.0000  -0.245571   0.245571
+(Intercept)  7.16094e-17   0.123731   0.00    1.0000  -0.245571   0.245571
 D            0.5           0.0879316  5.69    <1e-06   0.32548    0.67452
 X            0.5           0.152302   3.28    0.0014   0.197723   0.802277
 ──────────────────────────────────────────────────────────────────────────
-0.5
+0.5000000000000001
 
 ````
 
@@ -204,6 +204,38 @@ ovb_extreme_plot(0.097, 0.023, 783)
 ````
 
 ![Figure_8](images/Figure_8.png)
+
+Finally, we show how users can compute bounds on the strength of confounding using only summary statistics, if the paper also provides a treatment regression table, i.e., a regression of the treatment on the observed covariates. Such regressions are sometimes shown in published works as part of efforts to describe the “determinants” of the treatment, or as “balance tests” in which the investigator assesses whether observed covariates predict treatment assigment. For the Darfur example, the regression coefficient and standard errors (in parenthesis) of `female` for the outcome and treatment equation are -0.097 (0.036) and -0.232 (0.024). With these, we can now compute the formal bounds as shown below.
+
+````julia
+# computes partial R2 based on t-value of female
+r2yxj_dx = partial_r2(t_statistic = -0.232 / 0.024, dof = 783);
+r2dxj_x  = partial_r2(t_statistic = -0.097 / 0.036, dof = 783);
+
+# computes bounds on the strength of Z if it were 1, 2 or 3 times as strong as female
+bounds   = ovb_partial_r2_bound(r2dxj_x = r2dxj_x, r2yxj_dx = r2yxj_dx, kd = [1, 2, 3], ky = [1, 2, 3], benchmark_covariates = "female")
+````
+
+```@raw html
+<div><div style = "float: left;"><span>3×3 DataFrame</span></div><div style = "clear: both;"></div></div><div class = "data-frame" style = "overflow-x: scroll;"><table class = "data-frame" style = "margin-bottom: 6px;"><thead><tr class = "header"><th class = "rowNumber" style = "font-weight: bold; text-align: right;">Row</th><th style = "text-align: left;">bound_label</th><th style = "text-align: left;">r2dz_x</th><th style = "text-align: left;">r2yz_dx</th></tr><tr class = "subheader headerLastRow"><th class = "rowNumber" style = "font-weight: bold; text-align: right;"></th><th title = "String" style = "text-align: left;">String</th><th title = "Float64" style = "text-align: left;">Float64</th><th title = "Float64" style = "text-align: left;">Float64</th></tr></thead><tbody><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">1</td><td style = "text-align: left;">1.0x female</td><td style = "text-align: right;">0.00927207</td><td style = "text-align: right;">0.121575</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">2</td><td style = "text-align: left;">2.0x female</td><td style = "text-align: right;">0.0185441</td><td style = "text-align: right;">0.243193</td></tr><tr><td class = "rowNumber" style = "font-weight: bold; text-align: right;">3</td><td style = "text-align: left;">3.0x female</td><td style = "text-align: right;">0.0278162</td><td style = "text-align: right;">0.364854</td></tr></tbody></table></div>
+```
+
+````julia
+# computes adjusted estimate based on bounds
+bound_values = adjusted_estimate(bounds[:, "r2dz_x"], bounds[:, "r2yz_dx"], estimate = 0.0973, se = 0.0232, dof = 783);
+
+# draws contours
+ovb_contour_plot(0.097, 0.023, 783);
+
+# adds bounds
+add_bound_to_contour(bounds, bound_value = bound_values, label_bump_x = 0.6/30, label_bump_y = 0.6/30)
+````
+
+![Figure_9](images/Figure_9.png)
+
+## References
+
+Cinelli, C. Hazlett, C. (2020) “Making Sense of Sensitivity: Extending Omitted Variable Bias”. Journal of the Royal Statistical Society, Series B (Statistical Methodology). ( [link](https://doi.org/10.1111/rssb.12348) )
 
 ---
 
