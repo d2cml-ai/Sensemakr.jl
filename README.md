@@ -1,7 +1,3 @@
-```@meta
-EditURL = "<unknown>/docs/src/jl/README.jl"
-```
-
 # Sensemakr
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://d2cml-ai.github.io/Sensemakr.jl/stable/)
