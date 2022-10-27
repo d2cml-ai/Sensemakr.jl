@@ -17,7 +17,8 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "quickstart.md",
-        "advanced_use.md",
+        "advanced_use.md", 
+        "function_docs.md",
     ],
 )
 

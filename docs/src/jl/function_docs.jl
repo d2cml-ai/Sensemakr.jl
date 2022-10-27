@@ -13,14 +13,30 @@
 # ```
 #
 # ```@docs
-# Sensemakr.summary
+# summary(::sensemakr, ::Int64)
 # ```
 #
 # ```@docs
+# Sensemakr.plot
+# ```
+#
+# ```@docs
+# Sensemakr.ovb_minimal_reporting
+# ```
 # 
+# ## Plotting functions
 #
-# ## Sensitivity Plots
+# `Sensemakr` provides functions for creating sensitivity contour plots and extreme scenario sensitivity plots. They can be used on an object of class *sensemakr*, directly with an OLS `StatsModels.TableRegressionModel` object, or by providing the required statistics manually.
 #
-# `Sensemakr` provides functions for creating sensitivity contour plots and extreme scenario sensitivity plots. They can be used on an object of class *sensemakr*, directly in an OLS *statsmodel*, or by providing the required statistics manually.
+# ```@docs
+# Sensemakr.ovb_contour_plot
+# ```
 #
-# 
+# ```@docs
+# Sensemakr.add_bound_to_contour
+# ```
+#
+# ```@docs
+# Sensemakr.ovb_extreme_plot
+# ```
+#
