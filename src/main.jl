@@ -1,3 +1,9 @@
+"""
+    Sensemakr.sensemakr
+
+Object comprised of necessary parameters and statistics for sensitivity analysis
+"""
+
 mutable struct sensemakr
     
     model::StatsModels.TableRegressionModel
@@ -26,6 +32,28 @@ mutable struct sensemakr
     bench_bounds::Union{Nothing, DataFrame}
     bounds::Union{Nothing, DataFrame}
 end
+
+"""
+    Sensemakr.sensemakr(model::StatsModels.TableRegressionModel, treatment::String; kwargs...)
+
+Constructor for the `sensemakr` type. It expects a StatsModels.TableRegressionModel object and a treatment name string as input. It then performs the operations necessary to generate the fields required by the `sensemakr` type.
+
+Arguments:
+
+- `model`: a StatsModels.TableRegressionModel object for the restricted regression model you have provided.
+- `treatment`: a string with the name of the "treatment" variable, e.g. the independent variable of interest.
+- `benchmark_covariates` (default: `nothing`): a string or vector of strings with the names of the variables to use for benchmark bounding.
+- `kd` (default: 1): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
+- `ky` (default: nothing): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
+- `q` (default: 1): a float with the percent to reduce the point estimate by for the robustness value RV_q.
+- `alpha` (default = 0.05): a float with the significance level for the robustness value RV_qa to render the estimate not significant.
+- `r2dz_x` (default: nothing): a float or vector of floats with the partial R^2 of a putative unobserved confounder "z" with the treatment variable "d", with observed covariates "x" partialed out. In this case, you are manually specifying a putative confounder's strength rather than benchmarking.
+- `r2yz_dx` (default: nothing): a float or vector of floats with the partial R^2 of a putative unobserved confounder "z" with the outcome variable "y", with observed covariates "x" and treatment variable "d" partialed out. In this case, you are manually specifying a putative confounder's strength rather than benchmarking.
+- `r2dxj_x` (default: nothing): float with the partial R2 of covariate Xj with the treatment D (after partialling out the effect of the remaining covariates X, excluding Xj).
+- `r2yxj_dx` (default: nothing): float with the partial R2 of covariate Xj with the outcome Y (after partialling out the effect of the remaining covariates X, excluding Xj).
+- `bound_label` (default: "Manual Bound"): a string that specifies what to call the name of a bounding variable, for printing and plotting purposes.
+- `reduce` (default: true): whether to reduce (true) or increase (false) the estimate due to putative confounding.
+"""
 
 function sensemakr(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, 
     r2dz_x = nothing, r2yz_dx = nothing, r2dxj_x = nothing, r2yxj_dx = nothing, bound_label = "Manual Bound", reduce = true)
@@ -122,6 +150,18 @@ end
     
 end =#
 
+"""
+    Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
+
+Print a summary of the sensitivity results for `sense_obj`, including robustness value, extreme confounding scenario, and benchmark bounding.
+
+Arguments:
+
+- sense_obj: the sensemakr object to be summarized.
+- digits (default: 3): an integer for the number of digits to round numbers to.
+- kwargs...: Optional arguments to be dispatched into ovb_contour_plot and ovb_extreme_plot.
+"""
+
 function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
     if sense_obj.reduce
@@ -187,6 +227,20 @@ function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
     end
 end
 
+"""
+    Sensemakr.plot(sense_obj::sensemakr; kwargs...)
+
+Provide the contour and extreme scenario sensitivity plots of the sensitivity analysis results obtained with the function sensemakr
+
+They are basically dispatchers to the core plot functions ovb_contour_plot and ovb_extreme_plot
+
+Arguments:
+
+- sense_obj: sensemakr obj with the statistics to be plotted.
+- plot_type (default: "contour"): Either "extreme" or contour.
+- sensitivity_of (default: "estimate"): Either 
+"""
+
 function plot(sense_obj::sensemakr; plot_type = "contour", kwargs...)
 
     if plot_type == "contour"
@@ -215,6 +269,17 @@ function ovb_bounds(sense_obj::sensemakr)
     return ovb_bounds(model, treatment; benchmark_covariates, kd, ky, alpha, h0, reduce, bound, adjusted_estimates)
 end
 
+"""
+    Base.print(sense_obj::sensemakr, digits = 3)
+
+Print a short summary of the sensitivity results for a sensemakr object, including formula, hypothesis, and sensitivity analysis.
+
+Arguments:
+
+- `sense_obj`: the sensemakr object to be summarized.
+- `digits` (default: 3): an integer for the number of digits to round numbers to.
+"""
+
 function Base.print(sense_obj::sensemakr, digits = 3)
 
     if sense_obj.reduce
@@ -241,6 +306,17 @@ function Base.print(sense_obj::sensemakr, digits = 3)
     println("   Robustness Value, q = ", sense_obj.q, ": ", round(sense_obj.sensitivity_statistics["rv_q"][1], digits = digits))
     println("   Robustness Value, q = ", sense_obj.q, " alpha = ", sense_obj.alpha, ": ", round(sense_obj.sensitivity_statistics["rv_qa"][1], digits = digits), "\n")
 end
+
+"""
+    ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_display::Bool = true)
+
+This function returns the HTML code for a table summarizing the sensemakr object.
+
+Arguments:
+
+- `digits` (default: 3): an integer for the number of digits to round numbers to.
+- `res_display` (default: true): whether to display the table.
+"""
 
 function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_display::Bool = true)
 
