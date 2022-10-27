@@ -3,7 +3,6 @@
 
 Object comprised of necessary parameters and statistics for sensitivity analysis
 """
-
 mutable struct sensemakr
     
     model::StatsModels.TableRegressionModel
@@ -54,7 +53,6 @@ Arguments:
 - `bound_label` (default: "Manual Bound"): a string that specifies what to call the name of a bounding variable, for printing and plotting purposes.
 - `reduce` (default: true): whether to reduce (true) or increase (false) the estimate due to putative confounding.
 """
-
 function sensemakr(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates = nothing, kd = 1, ky = nothing, q = 1, alpha = 0.05, 
     r2dz_x = nothing, r2yz_dx = nothing, r2dxj_x = nothing, r2yxj_dx = nothing, bound_label = "Manual Bound", reduce = true)
 
@@ -161,7 +159,6 @@ Arguments:
 - digits (default: 3): an integer for the number of digits to round numbers to.
 - kwargs...: Optional arguments to be dispatched into ovb_contour_plot and ovb_extreme_plot.
 """
-
 function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
     if sense_obj.reduce
@@ -240,7 +237,6 @@ Arguments:
 - plot_type (default: "contour"): Either "extreme" or contour.
 - sensitivity_of (default: "estimate"): Either 
 """
-
 function plot(sense_obj::sensemakr; plot_type = "contour", kwargs...)
 
     if plot_type == "contour"
@@ -279,7 +275,6 @@ Arguments:
 - `sense_obj`: the sensemakr object to be summarized.
 - `digits` (default: 3): an integer for the number of digits to round numbers to.
 """
-
 function Base.print(sense_obj::sensemakr, digits = 3)
 
     if sense_obj.reduce
@@ -317,7 +312,6 @@ Arguments:
 - `digits` (default: 3): an integer for the number of digits to round numbers to.
 - `res_display` (default: true): whether to display the table.
 """
-
 function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_display::Bool = true)
 
     result = "<table style = 'align:center'>\n" * "<thead\n" * 
