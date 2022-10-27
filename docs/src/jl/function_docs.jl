@@ -1,6 +1,6 @@
-# # Function descriptions
+# # Object Documentation
 #
-# ## Description and analysis functions
+# ## Descriptions and analysis
 # 
 # Sensitivity analysis to unobserved confounders.
 # 
