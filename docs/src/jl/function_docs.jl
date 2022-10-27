@@ -1,6 +1,6 @@
 # # Object Documentation
 #
-# ## Descriptions and analysis
+# ## `sensemakr` object
 # 
 # Sensitivity analysis to unobserved confounders.
 # 

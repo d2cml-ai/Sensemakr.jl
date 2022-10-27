@@ -2,9 +2,9 @@
 EditURL = "<unknown>/jl/function_docs.jl"
 ```
 
-# Function descriptions
+# Object Documentation
 
-## Description and analysis functions
+## `sensemakr` object
 
 Sensitivity analysis to unobserved confounders.
 
