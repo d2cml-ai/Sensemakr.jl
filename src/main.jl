@@ -37,10 +37,10 @@ end
 
 Constructor for the `sensemakr` type. It expects a StatsModels.TableRegressionModel object and a treatment name string as input. It then performs the operations necessary to generate the fields required by the `sensemakr` type.
 
-Arguments:
+# Arguments:
 
-- `model`: a StatsModels.TableRegressionModel object for the restricted regression model you have provided.
-- `treatment`: a string with the name of the "treatment" variable, e.g. the independent variable of interest.
+- `model`: restricted regression model to be provided.
+- `treatment`: name of the "treatment" variable, e.g. the independent variable of interest.
 - `benchmark_covariates` (default: `nothing`): a string or vector of strings with the names of the variables to use for benchmark bounding.
 - `kd` (default: 1): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
 - `ky` (default: nothing): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
@@ -153,10 +153,10 @@ end =#
 
 Print a summary of the sensitivity results for `sense_obj`, including robustness value, extreme confounding scenario, and benchmark bounding.
 
-Arguments:
+# Arguments:
 
-- `sense_obj`: the sensemakr object to be summarized.
-- `digits` (default: 3): an integer for the number of digits to round numbers to.
+- `sense_obj`: object to be summarized.
+- `digits` (default: 3): number of digits to round numbers to.
 """
 function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
@@ -230,10 +230,10 @@ Provide the contour and extreme scenario sensitivity plots of the sensitivity an
 
 They are basically dispatchers to the core plot functions ovb_contour_plot and ovb_extreme_plot
 
-Arguments:
+# Arguments:
 
-- `sense_obj`: sensemakr obj with the statistics to be plotted.
-- `plot_type` (default: "contour"): Either "extreme" or contour.
+- `sense_obj`: object with the statistics to be plotted.
+- `plot_type` (default: "contour"): Either "extreme" or "contour".
 - `sensitivity_of` (default: "estimate"): Either "estimate" or "t-value"
 """
 function plot(sense_obj::sensemakr; plot_type = "contour", kwargs...)
@@ -269,10 +269,10 @@ end
 
 Print a short summary of the sensitivity results for a sensemakr object, including formula, hypothesis, and sensitivity analysis.
 
-Arguments:
+# Arguments:
 
-- `sense_obj`: the sensemakr object to be summarized.
-- `digits` (default: 3): an integer for the number of digits to round numbers to.
+- `sense_obj`: object to be summarized.
+- `digits` (default: 3): number of digits to round numbers to.
 """
 function Base.print(sense_obj::sensemakr, digits = 3)
 
@@ -306,9 +306,9 @@ end
 
 This function returns the HTML code for a table summarizing the sensemakr object.
 
-Arguments:
+# Arguments:
 
-- `digits` (default: 3): an integer for the number of digits to round numbers to.
+- `digits` (default: 3): number of digits to round numbers to.
 - `res_display` (default: true): whether to display the table.
 """
 function ovb_minimal_reporting(sense_obj::sensemakr, digits::Int64 = 3, res_display::Bool = true)
