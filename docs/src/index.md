@@ -18,7 +18,3 @@ Pages = [
 ]
 Depth = 2
 ```
-
-```@autodocs
-Modules = [Sensemakr]
-```
