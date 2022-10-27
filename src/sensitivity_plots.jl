@@ -192,7 +192,7 @@ function ovb_contour_plot(sense_obj::sensemakr; r2dz_x = nothing, r2yz_dx = noth
 end
 
 """
-    ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64)
+    ovb_extreme_plot(estimate::Float64, se::Float64, dof::Int64; kwargs...)
 
 Extreme scenario plots of omitted variable bias for sensitivity analysis.
 
@@ -369,7 +369,7 @@ function extract_from_sense_obj(sense_obj::sensemakr)
 end
 
 """
-    add_bound_to_contour(r2dz_x::Union{Real, Array{<:Real}}, r2yz_dx::Union{Real, Array{<:Real}}
+    add_bound_to_contour(r2dz_x::Union{Real, Array{<:Real}}, r2yz_dx::Union{Real, Array{<:Real}; kwargs...}
 
 Add bound label to the contour plot of omitted variable bias for sensitivity analysis.
 
