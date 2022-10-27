@@ -155,9 +155,8 @@ Print a summary of the sensitivity results for `sense_obj`, including robustness
 
 Arguments:
 
-- sense_obj: the sensemakr object to be summarized.
-- digits (default: 3): an integer for the number of digits to round numbers to.
-- kwargs...: Optional arguments to be dispatched into ovb_contour_plot and ovb_extreme_plot.
+- `sense_obj`: the sensemakr object to be summarized.
+- `digits` (default: 3): an integer for the number of digits to round numbers to.
 """
 function Base.summary(sense_obj::sensemakr, digits::Int64 = 3)
 
@@ -233,9 +232,9 @@ They are basically dispatchers to the core plot functions ovb_contour_plot and o
 
 Arguments:
 
-- sense_obj: sensemakr obj with the statistics to be plotted.
-- plot_type (default: "contour"): Either "extreme" or contour.
-- sensitivity_of (default: "estimate"): Either 
+- `sense_obj`: sensemakr obj with the statistics to be plotted.
+- `plot_type` (default: "contour"): Either "extreme" or contour.
+- `sensitivity_of` (default: "estimate"): Either "estimate" or "t-value"
 """
 function plot(sense_obj::sensemakr; plot_type = "contour", kwargs...)
 
