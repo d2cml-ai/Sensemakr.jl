@@ -44,6 +44,22 @@ Sensemakr.add_bound_to_contour
 Sensemakr.ovb_extreme_plot
 ```
 
+## Sensitivity Bounds
+
+Bounds on the strength of unobserved confounders using observed covariates, as in Cinelli and Hazlett (2020).
+
+These functions may be useful when computing benchmarks for using only summary statistics from papers you see in print.
+
+Currently only the bounds based on partial R2 are implemented. Other bounds will be implemented soon.
+
+```@docs
+Sensemakr.ovb_bounds
+```
+
+```@docs
+Sensemakr.ovb_partial_r2_bound
+```
+
 ---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*

@@ -1,5 +1,24 @@
-function ovb_bounds(model, treatment; benchmark_covariates = nothing, kd = 1, ky = nothing, alpha::Float64 = 0.05, 
-    h0 = 0, reduce = true, bound = "partial_r2", adjusted_estimates::Bool = true)
+"""
+    ovb_bounds(model::StatsModels.TableRegressionModel, treatment::String; kwargs...)
+
+Returns a `DataFrame` which provides bounds on the strength of unobserved confounders using observed covariates, as in Cinelli and Hazlett (2020).
+
+# Arguments
+
+- `model`: object for the restricted regression you have provided.
+- `treatment`: name of the treatment variable or variable of interest.
+- `benchmark_covariates`: names of variables to use for benchmark bounding.
+- `kd` (default: 1): multiple of the strength of association between a benchmark variable and the treatment.
+- `ky`: same as kd except measured in terms of strength of association with the outcome variable.
+- `alpha` (default: 0.05): significance level for the robustness value \$RV_qa\$ to render the estimate not significant.
+- `h0` (default: 0): null hypothesis effect size.
+- `reduce` (default: true): whether to reduce (true) or increase (false) the estimate due to putative computing.
+- `bound` (default: "partial_r2"): type of bound to perform; as of now, only partial R^2 bounding is allowed.
+- `adjusted_estimates` (default: true): whether to compute bias-adjusted estimates, standard errors, and t-statistics.
+"""
+function ovb_bounds(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates::Union{String, Vector{String}, Nothing} = nothing, 
+    kd::Union{Vector{<:Real}, Real} = 1, ky::Union{Vector{<:Real}, Real, Nothing} = nothing, alpha::Float64 = 0.05, h0::Real = 0, reduce::Bool = true, 
+    bound::String = "partial_r2", adjusted_estimates::Bool = true)
 
     if isnothing(ky)
         ky = kd
@@ -25,8 +44,27 @@ function ovb_bounds(model, treatment; benchmark_covariates = nothing, kd = 1, ky
     return bounds
 end
 
-function ovb_partial_r2_bound(; model = nothing, treatment::Union{Nothing, String} = nothing, r2dxj_x = nothing, 
-    r2yxj_dx = nothing, benchmark_covariates::Union{Nothing, String, Array{String}, Dict{String, String}} = nothing, kd = 1, ky = nothing)
+"""
+    ovb_partial_r2_bound(; kwargs...)
+
+Returns a `DataFrame` with the bounds on the strength of the unobserved confounder.
+
+Adjusted estimates, standard errors and t-values (among other quantities) need to be computed manually by the user using those bounds with the functions adjusted_estimate, adjusted_se and adjusted_t.
+
+# Arguments
+
+- `model`: `StatsModels.TableRegressionModel` object for the restricted regression you have provided.
+- `treatment`: string with the name of the treatment variable of interest.
+- `r2dxj_x`: float with the partial R2 of covariate Xj with the treatment D (after partialling out the effect of the remaining covariates X, excluding Xj).
+- `r2yxj_dx`: float with the partial R2 of covariate Xj with the outcome Y (after partialling out the effect of the remaining covariates X, excluding Xj).
+- `benchmark_covariates`: a string or vector of strings with names of the variables to use for benchmark bounding.
+- `kd` (default: 1): a float or list of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
+- `ky` (default: nothing): same as kd except measured in terms of strength of association with the outcome variable.
+"""
+function ovb_partial_r2_bound(; model::Union{StatsModels.TableRegressionModel, Nothing} = nothing, treatment::Union{Nothing, String} = nothing, 
+    r2dxj_x::Union{Vector{<:Real}, Real, Nothing} = nothing, r2yxj_dx::Union{Vector{<:Real}, Real, Nothing} = nothing, 
+    benchmark_covariates::Union{Nothing, String, Array{String}, Dict{String, String}} = nothing, kd::Union{Vector{<:Real}, Real} = 1, 
+    ky::Union{Vector{<:Real}, Real, Nothing} = nothing)
 
     if (isnothing(model) || isnothing(treatment)) && (isnothing(r2dxj_x) || isnothing(r2yxj_dx))
         throw(ArgumentError("ovb_partial_r2_bound requires either a GLM LinearModel objecto and a treatment name or the partial R2 values with the benchmark covariate, r2dxj_x and r2yz_dx"))
