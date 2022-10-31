@@ -209,8 +209,8 @@ See Cinelli and Hazlett (2020) for details.
 - `benchmark_covariates` (default: `nothing`): a string or vector of strings with the names of the variables to use for benchmarking.
 - `kd` (default: 1): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
 - `ky` (default: nothing): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
-- `r2dz_x` (default: nothing): a float or vector of floats with the partial R^2 of a putative unobserved confounder "z" with the treatment variable "d", with observed covariates "x" partialed out, as implied by z being kd-times as strong as the benchmark_covariates.
-- `r2yz_dx` (default: [1.0, 0.75, 0.5]): a float or vector of floats with the partial R^2 of a putative unobserved confounder "z" with the outcome variable "y", with observed covariates "x" and the treatment variable "d" partialed out, as implied by z being ky-times as strong as the benchmark_covariates.
+- `r2dz_x` (default: nothing): a float or vector of floats with the partial \$R^2\$ of a putative unobserved confounder "z" with the treatment variable "d", with observed covariates "x" partialed out, as implied by z being kd-times as strong as the benchmark_covariates.
+- `r2yz_dx` (default: [1.0, 0.75, 0.5]): a float or vector of floats with the partial \$R^2\$ of a putative unobserved confounder "z" with the outcome variable "y", with observed covariates "x" and the treatment variable "d" partialed out, as implied by z being ky-times as strong as the benchmark_covariates.
 - `reduce` (default: true): whether to reduce (true) or increase (false) the estimate due to putative confounding.
 - `threshold` (default: 0): threshold line to emphasize when contours correspond to estimate.
 - `lim` (default: nothing): x axis maximum.
@@ -377,8 +377,8 @@ The reference points are the bounds on the partial R2 of the unobserved confound
 
 # Arguments
 
-- `r2dz_x`: partial R^2 of a putative unobserved confounder "z" with the treatment variable "d", with observed covariates "x" partialed out, as implied by z being kd-times as strong as the benchmark_covariates.
-- `r2yz_dx` partial R^2 of a putative unobserved confounder "z" with the outcome variable "y", with observed covariates "x" and the treatment variable "d" partialed out, as implied by z being ky-times as strong as the benchmark_covariates.
+- `r2dz_x`: partial \$R^2\$ of a putative unobserved confounder "z" with the treatment variable "d", with observed covariates "x" partialed out, as implied by z being kd-times as strong as the benchmark_covariates.
+- `r2yz_dx` partial \$R^2\$ of a putative unobserved confounder "z" with the outcome variable "y", with observed covariates "x" and the treatment variable "d" partialed out, as implied by z being ky-times as strong as the benchmark_covariates.
 - `kd` (default: 1): a float or vector of floats with each being a multiple of the strength of association between a benchmark variable and the treatment variable to test with benchmark bounding.
 - `ky` (default: nothing): same as kd except measured in terms of strength of association with the outcome variable.
 - `bound_value` (default: nothing): the value of the reference point.

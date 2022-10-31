@@ -10,10 +10,10 @@ Returns a `DataFrame` which provides bounds on the strength of unobserved confou
 - `benchmark_covariates`: names of variables to use for benchmark bounding.
 - `kd` (default: 1): multiple of the strength of association between a benchmark variable and the treatment.
 - `ky`: same as kd except measured in terms of strength of association with the outcome variable.
-- `alpha` (default: 0.05): significance level for the robustness value \$RV_qa\$ to render the estimate not significant.
+- `alpha` (default: 0.05): significance level for the robustness value \$RV_{qa}\$ to render the estimate not significant.
 - `h0` (default: 0): null hypothesis effect size.
 - `reduce` (default: true): whether to reduce (true) or increase (false) the estimate due to putative computing.
-- `bound` (default: "partial_r2"): type of bound to perform; as of now, only partial R^2 bounding is allowed.
+- `bound` (default: "partial_r2"): type of bound to perform; as of now, only partial \$R^2\$ bounding is allowed.
 - `adjusted_estimates` (default: true): whether to compute bias-adjusted estimates, standard errors, and t-statistics.
 """
 function ovb_bounds(model::StatsModels.TableRegressionModel, treatment::String; benchmark_covariates::Union{String, Vector{String}, Nothing} = nothing, 
