@@ -112,10 +112,7 @@ Sensemakr.adjusted_partial_r2
 Sensemakr.bias
 ```
 
-````julia
-#```@docs
-````
-
+```@docs
 Sensemakr.relative_bias
 ```
 ## Data
