@@ -67,7 +67,7 @@ For details see Cinelli and Hazlett (2020).
 - `dof`: degrees of freedom of the restricted regression
 """
 function partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
-    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
+    t_statistic::Union{Vector{<:Real}, Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
     
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("partial_r2 requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
@@ -97,7 +97,7 @@ The partial (Cohen's) f2 is a common measure of effect size (a transformation of
 - `dof`: degrees of freedom of the restricted regression
 """
 function partial_f2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
-    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
+    t_statistic::Union{Vector{<:Real}, Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
 
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("partial_f2 requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
@@ -130,7 +130,7 @@ This function computes the partial R2 of a group of covariates in a linear regre
 - `p`: number of parameters.
 - `dof`: degrees of freedom of the restricted regression.
 """
-function group_partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, f_statistic::Union{Real, Nothing} = nothing, p::Union{Int64, Nothing} = nothing, dof::Union{Int64, Nothing} = nothing)
+function group_partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, f_statistic::Union{Vector{<:Real}, Real, Nothing} = nothing, p::Union{Int64, Nothing} = nothing, dof::Union{Int64, Nothing} = nothing)
 
     if (isnothing(model) || isnothing(covariates)) && (isnothing(f_statistic) || isnothing(p) || isnothing(dof))
         throw(ArgumentError("group_partial_r2 requires either a GLM LinearModel object and covariates or an f-statistic, number of parameters, and degrees of freedom"))
