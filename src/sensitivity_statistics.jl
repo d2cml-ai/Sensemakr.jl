@@ -17,7 +17,7 @@ For instance, a robustness value of 1% means that an unobserved confounder that 
 - `alpha` (default = 1.0): a float with the significance level for the robustness value RV_qa to render the estimate not significant.
 """
 function robustness_value(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
-    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing, q::Real = 1, alpha::Float64 = 1.0)
+    t_statistic::Union{Vector{<:Real}, Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing, q::Real = 1, alpha::Float64 = 1.0)
     
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("robustness_value requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
