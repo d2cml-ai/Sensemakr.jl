@@ -1,7 +1,7 @@
 module Sensemakr
 
-export robustness_value, partial_r2, partial_f2, group_partial_r2, sensitivity_stats, adjusted_estimate, adjusted_se, adjusted_t, ovb_bounds, ovb_partial_r2_bound, ovb_contour_plot
-export add_bound_to_contour, ovb_extreme_plot, sensemakr, plot, load_darfur, print, ovb_minimal_reporting
+export robustness_value, partial_r2, partial_f2, group_partial_r2, sensitivity_stats, adjusted_estimate, adjusted_se, adjusted_t, bias, relative_bias, ovb_bounds
+export ovb_partial_r2_bound, ovb_contour_plot, add_bound_to_contour, ovb_extreme_plot, sensemakr, plot, load_darfur, print, ovb_minimal_reporting
 
 using CSV, DataFrames, Distributions, GLM, PyPlot, StatsModels
 

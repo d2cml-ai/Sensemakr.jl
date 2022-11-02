@@ -60,6 +60,72 @@ Sensemakr.ovb_bounds
 Sensemakr.ovb_partial_r2_bound
 ```
 
+## Sensitivity Statistics
+
+Computes the sensitivity statistics: robustness value, partial R2, and Cohen’s f2.
+
+```@docs
+Sensemakr.robustness_value
+```
+
+```@docs
+Sensemakr.partial_r2
+```
+
+```@docs
+Sensemakr.partial_f2
+```
+
+```@docs
+Sensemakr.group_partial_r2
+```
+
+## Bias functions
+
+Compute bias-adjusted estimates, standard-errors, and t-values.
+
+All methods in the script below have similar purposes and parameters, so they are all described here.
+
+These functions compute bias adjusted estimates (adjusted_estimate), standard-errors (adjusted_se), and t-values (adjusted_t), given a hypothetical strength of the confounder in the partial R2 parameterization.
+
+They return a vector with the adjusted estimate, standard error, or t-value for each partial R2 passed in.
+
+Internally, we also have functions defined to compute the bias and relative_bias, given the same arguments. We also define internal functions to compute the bias function and relative bias function for the partial R2 parameters.
+
+```@docs
+Sensemakr.adjusted_estimate
+```
+
+```@docs
+Sensemakr.adjusted_se
+```
+
+```@docs
+Sensemakr.adjusted_t
+```
+
+```@docs
+Sensemakr.adjusted_partial_r2
+```
+
+```@docs
+Sensemakr.bias
+```
+
+````julia
+#```@docs
+````
+
+Sensemakr.relative_bias
+```
+## Data
+
+Provides the example data for the package.
+
+```@docs
+Sensemakr.load_darfur
+```
+
 ---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*

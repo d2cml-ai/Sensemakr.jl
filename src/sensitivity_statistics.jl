@@ -1,4 +1,23 @@
-function robustness_value(; model = nothing, covariates = nothing, t_statistic = nothing, dof = nothing, q::Union{Float64, Int64} = 1, alpha::Float64 = 1.0)
+"""
+    robustness_value(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing, kwargs...)
+
+Compute the robustness value of a regression coefficient.
+
+The robustness value describes the minimum strength of association (parameterized in terms of partial R2) that omitted variables would need to have both with the treatment and with the outcome to change the estimated coefficient by a certain amount (for instance, to bring it down to zero).
+
+For instance, a robustness value of 1% means that an unobserved confounder that explain 1% of the residual variance of the outcome and 1% of the residual variance of the treatment is strong enough to explain away the estimated effect. Whereas a robustness value of 90% means that any unobserved confounder that explain less than 90% of the residual variance of both the outcome and the treatment assignment cannot fully account for the observed effect. You may also compute robustness value taking into account sampling uncertainty. See details in Cinelli and Hazlett (2020).
+
+# Arguments:
+
+- `model`: object for the restricted regression you have provided.
+- `covariates`: names of the variables to use for benchmark bounding.
+- `t_statistic`: the t_statistic for the restricted model regression.
+- `dof`: degrees of freedom of the restricted regression
+- `q` (default: 1): a float with the percent to reduce the point estimate by for the robustness value RV_q.
+- `alpha` (default = 1.0): a float with the significance level for the robustness value RV_qa to render the estimate not significant.
+"""
+function robustness_value(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
+    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing, q::Real = 1, alpha::Float64 = 1.0)
     
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("robustness_value requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
@@ -29,7 +48,26 @@ function robustness_value(; model = nothing, covariates = nothing, t_statistic =
     return rv_out
 end
 
-function partial_r2(; model = nothing, covariates = nothing, t_statistic = nothing, dof = nothing)
+"""
+    partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
+
+Compute the partial R2 for a linear regression model.
+
+The partial R2 describes how much of the residual variance of the outcome (after partialing out the other covariates) a covariate explains.
+
+The partial R2 can be used as an extreme-scenario sensitivity analysis to omitted variables. Considering an unobserved confounder that explains 100% of the residual variance of the outcome, the partial R2 describes how strongly associated with the treatment this unobserved confounder would need to be in order to explain away the estimated effect.
+
+For details see Cinelli and Hazlett (2020).
+
+# Arguments:
+
+- `model`: object for the restricted regression you have provided.
+- `covariates`: names of the variables to use for benchmark bounding.
+- `t_statistic`: the t_statistic for the restricted model regression.
+- `dof`: degrees of freedom of the restricted regression
+"""
+function partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
+    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
     
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("partial_r2 requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
@@ -44,7 +82,22 @@ function partial_r2(; model = nothing, covariates = nothing, t_statistic = nothi
     return t_statistic .^ 2 ./ (t_statistic .^ 2 .+ dof)
 end
 
-function partial_f2(; model = nothing, covariates = nothing, t_statistic = nothing, dof = nothing)
+"""
+    partial_f2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
+
+Compute the partial (Cohen's) f2 for a linear regression model.
+
+The partial (Cohen's) f2 is a common measure of effect size (a transformation of the partial R2) that can also be used directly for sensitivity analysis using a bias factor table. For details see Cinelli and Hazlett (2020).
+
+# Arguments
+
+- `model`: object for the restricted regression you have provided.
+- `covariates`: names of the variables to use for benchmark bounding.
+- `t_statistic`: the t_statistic for the restricted model regression.
+- `dof`: degrees of freedom of the restricted regression
+"""
+function partial_f2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, 
+    t_statistic::Union{Real, Nothing} = nothing, dof::Union{Nothing, Int64} = nothing)
 
     if isnothing(model) && (isnothing(t_statistic) || isnothing(dof))
         throw(ArgumentError("partial_f2 requires either a GLM LinearModel object or a t-statistic and degrees of freedom"))
@@ -64,7 +117,20 @@ function partial_f(; model = nothing, covariates = nothing, t_statistic = nothin
     return sqrt.(partial_f2(model = model, covariates = covariates, t_statistic = t_statistic, dof = dof))
 end
 
-function group_partial_r2(; model = nothing, covariates = nothing, f_statistic = nothing, p = nothing, dof = nothing)
+"""
+Partial R2 of groups of covariates in a linear regression model.
+
+This function computes the partial R2 of a group of covariates in a linear regression model. Multivariate version of the partial_r2 function; see that for more details.
+
+# Arguments
+
+- `model`: object for the restricted regression you have provided.
+- `covariates`: names of the variables to use for benchmark bounding.
+- `t_statistic`: t_statistic for the restricted model regression.
+- `p`: number of parameters.
+- `dof`: degrees of freedom of the restricted regression.
+"""
+function group_partial_r2(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, covariates::Union{Nothing, String, Vector{String}} = nothing, f_statistic::Union{Real, Nothing} = nothing, p::Union{Int64, Nothing} = nothing, dof::Union{Int64, Nothing} = nothing)
 
     if (isnothing(model) || isnothing(covariates)) && (isnothing(f_statistic) || isnothing(p) || isnothing(dof))
         throw(ArgumentError("group_partial_r2 requires either a GLM LinearModel object and covariates or an f-statistic, number of parameters, and degrees of freedom"))
@@ -86,7 +152,23 @@ function group_partial_r2(; model = nothing, covariates = nothing, f_statistic =
     return [f_statistic * p / (f_statistic * p + dof)]
 end
 
-function sensitivity_stats(; model = nothing, treatment::Union{String, Nothing} = nothing, estimate = nothing, se::Union{Real, Nothing} = nothing, 
+"""
+    sensitivity_stats(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, treatment::Union{String, Nothing} = nothing, estimate::Union{Nothing, Real} = nothing, se::Union{Real, Nothing} = nothing, dof::Union{Real, Nothing} = nothing)
+
+Computes the robustness_value, partial_r2 and partial_f2 of the coefficient of interest.
+
+# Arguments:
+
+- `model`: object for the restricted regression you have provided.
+- `treatment`: names of the treatment variable.
+- `estimate`: coefficient estimate of the restricted regression.
+- `se`: standard error of the restricted regression.
+- `dof`: degrees of freedom of the restricted regression.
+- `q` (default: 1): a float with the percent to reduce the point estimate by for the robustness value RV_q.
+- `alpha` (default = 1.0): a float with the significance level for the robustness value RV_qa to render the estimate not significant.
+- `reduce` (default = true): whether to reduce or increase the estimate due to confounding.
+"""
+function sensitivity_stats(; model::Union{Nothing, StatsModels.TableRegressionModel} = nothing, treatment::Union{String, Nothing} = nothing, estimate::Union{Nothing, Real} = nothing, se::Union{Real, Nothing} = nothing, 
     dof::Union{Real, Nothing} = nothing, q::Real = 1, alpha::Float64 = 0.05, reduce::Bool = true)
 
     if (isnothing(model) || isnothing(treatment)) && (isnothing(estimate) || isnothing(se) || isnothing(dof))
@@ -160,7 +242,6 @@ function check_r2(r2dz_x::Union{Nothing, Real, Array{Int64}, Array{Float64}}, r2
     end
     return r2dz_x, r2yz_dx
 end
-
 
 function check_q(q::Real)
     
